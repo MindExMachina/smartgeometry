@@ -3,3 +3,9 @@ A minimal node app to generate a sketch-rnn prediction from a set of strokes via
 ```bash
 node server.js
 ```
+
+Then make a POST request.
+
+```bash
+make post
+```
