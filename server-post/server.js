@@ -6,7 +6,15 @@ var port = process.env.PORT || 8080;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+var greetings = require('./lib/greetings.js');
+var sketchrnn = require('./lib/sketch_rnn.js');
+
 // routes
+
+app.get('/', function(req, res) {
+    var str = sketchrnn.talk();
+    res.send(str);
+});
 
 // sample GET request that receives an array of strokes
 // e.g. http://localhost:8080/get?strokes=[[4,5,0,3,2],[4,5,0,3,0]]
@@ -28,10 +36,13 @@ app.get('/get', function(req, res) {
 
 // same thing as a POST request
 app.post('/post', function(req, res) {
+
     console.log(req.body.strokes);
+
     var strokes = req.body.strokes;
     var strokes = JSON.parse(strokes);
     var increment = req.param('i') || 1;
+
     for (var i in strokes) {
         var components = strokes[i];
         for (var j in components) {
@@ -39,6 +50,7 @@ app.post('/post', function(req, res) {
             components[j] = parseInt(component) + parseInt(increment);
         }
     }
+
     res.json(strokes);
 });
 

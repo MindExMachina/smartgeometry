@@ -4,8 +4,11 @@
   "description": "A minimal node app to generate a sketch-rnn prediction from a set of strokes via http.",
   "main": "server.js",
   "dependencies": {
+    "atob": "2.0.3",
     "body-parser": "1.18.2",
+    "btoa": "1.1.2",
     "express": "4.16.2",
+    "numjs": "0.15.1",
     "ws": "4.1.0"
   },
   "devDependencies": {},
