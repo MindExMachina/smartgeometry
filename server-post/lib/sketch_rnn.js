@@ -17,6 +17,11 @@
  * @fileoverview Sketch-RNN Javascript Inference Library
  */
 
+// nono: added to run as Node.js module
+var nj = require('numjs');
+var atob = require('atob');
+var btoa = require('btoa');
+
 /**
  * Location of JSON models used for sketch-rnn-js
  */
