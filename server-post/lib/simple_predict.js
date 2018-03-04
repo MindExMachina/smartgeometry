@@ -14,7 +14,10 @@
 /**
  * Author: David Ha <hadavid@google.com>
  *
- * Author: Nono Martínez Alonso
+ * 2018
+ * 
+ * Author: Nono Martínez Alonso <mail@nono.ma>
+ * 
  * @fileoverview Adaptation of simple_predict.js to use sketch-rnn
  * to finish a drawing from an input set of strokes as a module.
  */
@@ -35,25 +38,34 @@ var model_state, model_state_orig;
 var model_prev_pen;
 var model_x, model_y;
 
-module.exports.model;
+// output
+var predicted_strokes;
 
-module.exports.run = function() {
+module.exports.output_strokes = function() {
+    return predicted_strokes;
+};
 
-    var strokes = [
-        [-4, 0, 1, 0, 0],
-        [-15, 9, 1, 0, 0],
-        [-10, 17, 1, 0, 0],
-        [-1, 28, 1, 0, 0],
-        [14, 13, 1, 0, 0],
-        [12, 4, 1, 0, 0],
-        [22, 1, 1, 0, 0],
-        [14, -11, 1, 0, 0],
-        [5, -12, 1, 0, 0],
-        [2, -19, 1, 0, 0],
-        [-12, -23, 1, 0, 0],
-        [-13, -7, 1, 0, 0],
-        [-14, -1, 0, 1, 0]
-    ];
+var strokes = [
+    [-4, 0, 1, 0, 0],
+    [-15, 9, 1, 0, 0],
+    [-10, 17, 1, 0, 0],
+    [-1, 28, 1, 0, 0],
+    [14, 13, 1, 0, 0],
+    [12, 4, 1, 0, 0],
+    [22, 1, 1, 0, 0],
+    [14, -11, 1, 0, 0],
+    [5, -12, 1, 0, 0],
+    [2, -19, 1, 0, 0],
+    [-12, -23, 1, 0, 0],
+    [-13, -7, 1, 0, 0],
+    [-14, -1, 0, 1, 0]
+];
+
+module.exports.set_strokes = function(s) {
+    strokes = s;
+}
+
+module.exports.predict = function() {
 
     var restart = function() {
         model_state = model.copy_state(model_state_orig);
@@ -64,6 +76,8 @@ module.exports.run = function() {
     }
 
     var encode_strokes = function() {
+        console.log('using these strokes:');
+        console.log(strokes);
         model_state_orig = model.zero_state();
         // encode strokes
         model_state_orig = model.update(model.zero_input(), model_state_orig);
@@ -95,9 +109,7 @@ module.exports.run = function() {
                 prediction.push(model_pen_end);
 
                 if (model_prev_pen[0] === 1) {
-
                     // draw line connecting prev point to current point.
-
                 }
 
                 model_prev_pen = [model_pen_down, model_pen_up, model_pen_end];
@@ -126,5 +138,5 @@ module.exports.run = function() {
     }
 
     setup();
-    var predicted_strokes = getModelStrokes();
+    predicted_strokes = getModelStrokes();
 };

@@ -6,10 +6,47 @@ var port = process.env.PORT || 8080;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-var greetings = require('./lib/greetings.js');
-var sketchrnn = require('./lib/sketch_rnn.js');
-
 // routes
+
+// http://localhost:8080/infer?strokes=[[-4,0,1,0,0],[-15,9,1,0,0],[-10,17,1,0,0],[-1,28,1,0,0]]
+app.get('/infer', function(req, res) {
+
+    // parse strokes from url
+    var strokes = req.param('strokes');
+
+    var simple_predict = require('./lib/simple_predict');
+    // if provided, change input strokes
+    if (strokes) {
+        var strokes = JSON.parse(strokes);
+        simple_predict.set_strokes(strokes)
+    }
+    // infer new strokes (and store in predicted_strokes)
+    simple_predict.predict();
+    // accessor for predicted_strokes
+    var predicted_strokes = simple_predict.output_strokes();
+
+    res.json(predicted_strokes);
+});
+
+// http://localhost:8080/infer?strokes=[[-4,0,1,0,0],[-15,9,1,0,0],[-10,17,1,0,0],[-1,28,1,0,0]]
+app.post('/infer', function(req, res) {
+
+    // parse strokes from url
+    var strokes = req.body.strokes;
+
+    var simple_predict = require('./lib/simple_predict');
+    // if provided, change input strokes
+    if (strokes) {
+        var strokes = JSON.parse(strokes);
+        simple_predict.set_strokes(strokes)
+    }
+    // infer new strokes (and store in predicted_strokes)
+    simple_predict.predict();
+    // accessor for predicted_strokes
+    var predicted_strokes = simple_predict.output_strokes();
+
+    res.json(predicted_strokes);
+});
 
 app.get('/', function(req, res) {
     var str = sketchrnn.talk();
