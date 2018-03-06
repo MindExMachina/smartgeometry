@@ -2,12 +2,12 @@ const Html5WebSocket = require('html5-websocket');
 const ReconnectingWebSocket = require('reconnecting-websocket');
 
 const options = { constructor: Html5WebSocket };
-const rws = new ReconnectingWebSocket('ws://127.0.0.1:8000/ws', undefined, options);
+const rws = new ReconnectingWebSocket('ws://smartgeometry.herokuapp.com:80/ws', undefined, options);
 rws.timeout = 1000;
 
 rws.addEventListener('open', () => {
-    console.log('send-strokes');
-    rws.send('{"method":"send-strokes", "params": {"strokes": [[-3,4,1,0,0],[3,10,1,0,0]]}}');
+    //console.log('send-strokes');
+    //rws.send('{"method":"send-strokes", "params": {"strokes": [[-3,4,1,0,0],[3,10,1,0,0]]}}');
 });
 
 rws.addEventListener('message', (e) => {
