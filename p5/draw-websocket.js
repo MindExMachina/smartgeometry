@@ -1,3 +1,6 @@
+/**
+ * Drawing of a Croquetilla with a p5.js flag.
+ */
 let croquetilla = [
     [389, 176, 378, 175, 368, 177, 357, 180, 347, 183, 337, 190, 326, 197, 317, 207, 310, 217, 304, 226, 300, 236, 294, 247, 291, 257, 291, 268, 291, 279, 292, 290, 294, 301, 297, 311, 301, 321, 305, 331, 311, 343, 317, 352, 330, 366, 340, 374, 350, 382, 362, 388, 374, 394, 384, 396, 396, 400, 406, 402, 418, 402, 430, 402, 441, 402, 452, 400, 462, 397, 472, 393, 481, 386, 490, 380, 497, 371, 504, 363, 508, 353, 514, 344, 518, 333, 521, 323, 521, 312, 522, 302, 522, 291, 522, 280, 521, 270, 517, 260, 513, 250, 508, 241, 503, 230, 498, 221, 493, 212, 485, 204, 477, 196, 469, 189, 460, 183, 450, 180, 439, 177, 429, 175, 419, 174, 409, 173, 399, 172, 388, 172],
     [398, 171, 400, 181, 401, 191, 402, 201, 402, 212, 402, 223, 402, 234, 400, 245, 397, 255, 392, 265, 386, 274, 379, 282, 371, 289, 361, 294, 350, 296, 340, 299, 330, 300, 320, 301, 309, 302, 298, 302, 286, 304, 275, 309, 266, 314, 257, 320, 249, 327, 241, 334, 234, 342, 229, 351, 226, 362, 222, 372, 218, 383, 222, 393, 234, 398, 245, 400, 255, 401, 266, 401, 277, 401, 288, 399, 298, 397, 308, 395, 317, 389, 325, 381, 332, 373],
@@ -20,6 +23,9 @@ let croquetilla = [
     [520, 324, 530, 318, 538, 310, 547, 303, 555, 295, 562, 286, 565, 276, 566, 265, 575, 260, 585, 264, 583, 274, 574, 279, 564, 278]
 ]
 
+/**
+ * Drawing of a lighthouse.
+ */
 let lighthouse = [
     [466, 394, 466, 383, 470, 371, 479, 357, 481, 345, 484, 325, 486, 309, 487, 299, 488, 286, 489, 275, 491, 265, 491, 254, 492, 244, 493, 233, 494, 221, 494, 210, 496, 200, 496, 186, 496, 174, 496, 163, 506, 159, 520, 159, 530, 157, 540, 154, 551, 153, 560, 158, 563, 171, 566, 188, 568, 202, 571, 218, 572, 234, 576, 253, 577, 264, 580, 276, 582, 292, 583, 308, 586, 322, 588, 335, 589, 349, 591, 362, 593, 373, 594, 384, 596, 397, 597, 408, 598, 418],
     [521, 198, 521, 209, 528, 217, 533, 208, 533, 197, 525, 190, 520, 199],
@@ -35,15 +41,37 @@ let lighthouse = [
     [517, 391, 515, 379, 515, 368, 515, 357, 517, 347, 522, 338, 531, 333, 538, 341, 539, 353, 539, 364, 539, 375, 539, 386, 538, 396]
 ]
 
+/**
+ * Current (cumulative) drawing strokes from both the user
+ * and other clients connected to the drawing application.
+ */
 let strokes = [];
 
+/**
+ * The stroke that is currently being drawn by the user.
+ */
 let currentStroke = [];
 
 //let drawingMode = 'POLYLINE';
 let drawingMode = 'SKETCH';
 
+/**
+ * Minimum distance (in pixels) between points in a sketched polyline.
+ */
 let tolerance = 10;
 
+/**
+ * Sketch-rnn drawing variables.
+ */
+var model_x, model_y;
+var model_prev_pen = [1, 0, 0];
+var last_x, last_y;
+
+/**
+ * The setup() function serves to initialize your p5.js sketch.
+ * Things like setting the canvas size, frame rate, or other
+ * global settings.
+ */
 function setup() {
 
     if (location.href.split('#s=').length > 1) {
@@ -67,8 +95,6 @@ function setup() {
     noFill()
 }
 
-var model_x, model_y;
-
 function draw() {
 
     background(255);
@@ -81,12 +107,8 @@ function draw() {
     model_y = origin_y;
 
     drawAbsoluteStrokes(strokes);
-
 }
 
-var model_prev_pen = [1, 0, 0];
-
-var last_x, last_y;
 
 function drawAbsoluteStrokes() {
 
@@ -194,7 +216,7 @@ function mouseReleased() {
     currentStroke = [];
 }
 
-// Helpers
+// Math helpers
 
 function tryAddPoint(x, y, p1, p2, p3) {
     //let lastPoint = strokes[strokes.length - 1]
