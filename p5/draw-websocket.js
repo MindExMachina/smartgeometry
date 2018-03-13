@@ -13,7 +13,7 @@
  * Websocket server configuration.
  */
 
-const local = true;
+const local = false;
 
 let host = 'smartgeometry.herokuapp.com';
 let port = '80';
@@ -85,7 +85,7 @@ let drawingMode = 'SKETCH';
 /**
  * Minimum distance (in pixels) between points in a sketched polyline.
  */
-let tolerance = 3;
+let tolerance = 15;
 
 /**
  * Sketch-rnn drawing variables.
@@ -167,9 +167,9 @@ function drawAbsoluteStrokes() {
         let model_pen_end = location[4];
 
         // Not needed since we are iteration on points (not on the model)
-        if (model_prev_pen[2] == 1) {
-            break;
-        }
+        // if (model_prev_pen[2] == 1) {
+        // break;
+        // }
 
         if (prev_location != undefined && model_prev_pen[0] == 1) {
             line(prev_location[0], prev_location[1], x, y);
@@ -205,9 +205,9 @@ function drawRelativeStrokes() {
         let model_pen_end = location[4];
 
         // Not needed since we are iteration on points (not on the model)
-        if (model_prev_pen[2] == 1) {
-            break;
-        }
+        //if (model_prev_pen[2] == 1) {
+        //    break;
+        //}
 
         if (model_prev_pen[0] == 1) {
             line(model_x, model_y, model_x + model_dx, model_y + model_dy);
@@ -262,12 +262,15 @@ function tryAddPoint(x, y, p1, p2, p3) {
 }
 
 function addPoint(x, y, p1, p2, p3) {
-    var location = [x, y, p1, p2, p3];
-    strokes.push(location);
-    currentStroke.push(location);
-    //if (instantsend) {
-    rws.send('{"method":"send-strokes", "params": {"strokes": [' + JSON.stringify(location) + ']}}');
-    //}
+    if (y < windowHeight * 0.88) {
+
+        var location = [x, y, p1, p2, p3];
+        strokes.push(location);
+        currentStroke.push(location);
+        //if (instantsend) {
+        rws.send('{"method":"send-strokes", "params": {"strokes": [' + JSON.stringify(location) + ']}}');
+        //}
+    }
 }
 
 function distance(x0, y0, x1, y1) {
@@ -282,18 +285,15 @@ function absolute2relative(strokes) {
     let prev_x, prev_y;
 
     for (var i in strokes) {
-        let location = strokes[i];
+
         let x = strokes[i][0];
         let y = strokes[i][1];
         let p1 = strokes[i][2];
         let p2 = strokes[i][3];
         let p3 = strokes[i][4];
 
-        let rLocation;
-
         if (i > 0) {
-            rLocation = [prev_x - x, prev_y - y, p1, p2, p3];
-            rStrokes.push(rLocation);
+            rStrokes.push([x - prev_x, y - prev_y, p1, p2, p3]);
         }
 
         prev_x = x;
@@ -334,9 +334,10 @@ function getSVG(strokes) {
         let model_pen_end = location[4];
 
         // Not needed since we are iteration on points (not on the model)
-        if (model_prev_pen[2] == 1) {
-            break;
-        }
+        // predictions would kill the drawing loop
+        //if (model_prev_pen[2] == 1) {
+        //    break;
+        //}
 
         if (i > 0) {
             s += ' ';
@@ -363,6 +364,12 @@ function getSVG(strokes) {
  * https://github.com/ccampbell/mousetrap 
  */
 
+Mousetrap.bind(['command+x', 'command+o'], function(e) {
+    console.log('clear');
+    strokes = [];
+    return false;
+});
+
 Mousetrap.bind('command+s', function(e) {
     console.log('save');
     saveSVG(strokes);
@@ -371,12 +378,17 @@ Mousetrap.bind('command+s', function(e) {
 
 Mousetrap.bind('command+i', function(e) {
     console.log('predict');
-    rws.send(
-        '{"method":"sketch-rnn:get-prediction:0.0.1", ' +
-        '"params": {"strokes": ' + JSON.stringify(absolute2relative(strokes)) + '},' +
-        '"id": "' + uuid() + '"}');
+    requestPrediction();
     return false;
 });
+
+var requestPrediction = function() {
+    rws.send(
+        '{"method":"sketch-rnn:get-prediction:0.0.1", ' +
+        //'"params": {"strokes": ' + JSON.stringify(absolute2relative(strokes)) + '},' +
+        '"params": {"strokes": ' + JSON.stringify(strokes) + '},' +
+        '"id": "' + uuid() + '"}');
+}
 
 /**
  * FileSaver helpers
@@ -438,6 +450,7 @@ var handleClientId = function(m) {
 
 var handleDistributeStroke = function(m) {
     var newStrokes = m.params.strokes;
+    console.log(newStrokes);
     for (var i in newStrokes) {
         var location = newStrokes[i];
         strokes.push(location);
@@ -477,3 +490,21 @@ var handleMessage = function(m) {
         }
     }
 }
+
+
+document.body.innerHTML +=
+    '<div id="button-clear" style="position:absolute;border-radius:10px;display:block;left:140px;bottom:20px;background-color:white;width:100px;height:50px">clear</div>';
+
+document.body.innerHTML +=
+    '<div id="button-infer" style="position:absolute;border-radius:10px;left:20px;bottom:20px;background-color:white;width:100px;height:50px">infer</div>';
+document.getElementById('button-infer').onclick = function(e) {
+    requestPrediction();
+    e.preventDefault();
+    return false;
+};
+
+document.getElementById('button-clear').onclick = function(e) {
+    strokes = [];
+    e.preventDefault();
+    return false;
+};

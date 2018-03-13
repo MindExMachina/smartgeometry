@@ -45,6 +45,33 @@ module.exports.output_strokes = function() {
     return predicted_strokes;
 };
 
+module.exports.output_strokes_absolute = function() {
+
+    let x = absolute_x;
+    let y = absolute_y;
+
+    let absolute_strokes = [
+        [x, y, 1, 0, 0]
+    ];
+
+    for (var i in predicted_strokes) {
+
+        let dx = predicted_strokes[i][0];
+        let dy = predicted_strokes[i][1];
+        let p1 = predicted_strokes[i][2];
+        let p2 = predicted_strokes[i][3];
+        let p3 = predicted_strokes[i][4];
+
+        absolute_strokes.push([x + dx, y + dy, p1, p2, p3]);
+
+        x += dx;
+        y += dy;
+    }
+
+    return absolute_strokes
+}
+
+// default sample oval
 var strokes = [
     [-4, 0, 1, 0, 0],
     [-15, 9, 1, 0, 0],
@@ -61,8 +88,44 @@ var strokes = [
     [-14, -1, 0, 1, 0]
 ];
 
+// set relative stroke from relative strokes
 module.exports.set_strokes = function(s) {
     strokes = s;
+}
+
+let absolute_x, absolute_y;
+
+// set relative strokes from an absolute strokes
+module.exports.set_absolute_strokes = function(s) {
+    let absolute_sketch = absolute2relative(s);
+    strokes = absolute_sketch[0];
+    absolute_x = absolute_sketch[1];
+    absolute_y = absolute_sketch[2];
+}
+
+var absolute2relative = function(strokes) {
+
+    var rStrokes = [];
+    let prev_x, prev_y;
+
+    for (var i in strokes) {
+
+        let x = strokes[i][0];
+        let y = strokes[i][1];
+        let p1 = strokes[i][2];
+        let p2 = strokes[i][3];
+        let p3 = strokes[i][4];
+
+        if (i > 0) {
+            rStrokes.push([x - prev_x, y - prev_y, p1, p2, p3]);
+        }
+
+        prev_x = x;
+        prev_y = y;
+    }
+
+    // return strokes and last x, y
+    return [rStrokes, prev_x, prev_y];
 }
 
 module.exports.predict = function() {
@@ -102,11 +165,7 @@ module.exports.predict = function() {
 
                 // nono: store sketch values on a flat array of floats
                 // nono: dx, dy, p1, p2, p3
-                prediction.push(model_dx);
-                prediction.push(model_dy);
-                prediction.push(model_pen_down);
-                prediction.push(model_pen_up);
-                prediction.push(model_pen_end);
+                prediction.push([model_dx, model_dy, model_pen_down, model_pen_up, model_pen_end]);
 
                 if (model_prev_pen[0] === 1) {
                     // draw line connecting prev point to current point.

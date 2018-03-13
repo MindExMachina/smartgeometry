@@ -13,7 +13,7 @@ app.use(bodyParser.json());
  * Websocket server configuration.
  */
 
-const local = true;
+const local = false;
 
 let ws_host = 'smartgeometry.herokuapp.com';
 let ws_port = '80';
@@ -220,22 +220,33 @@ var handleSketchRNNGetPrediction001 = function(m) {
     console.log('OUTPUT STROKES');
     console.log('------------');
     console.log(outputStrokes);
+
+    rws.send(
+        '{"method":"send-strokes", ' +
+        '"params": {"strokes": ' + JSON.stringify(outputStrokes) + '},' +
+        '"id": "' + uuid() + '"}');
 }
 
+var uuid = function() {
+    return 'placeholder-uuid-node-server';
+}
+
+/**
+ * Get a prediction on how to continue a sketch
+ * using Google's Sketch RNN.
+ * 
+ * @param [[dx, dy, p1, p2, p3], […]] strokes 
+ */
 var sketchRNNGetPrediction = function(strokes) {
 
     var simple_predict = require('./lib/simple_predict');
 
-    // if provided, change input strokes
-    //  if (strokes) {
-    //        var strokes = JSON.parse(strokes);
-    simple_predict.set_strokes(strokes)
-        //}
+    simple_predict.set_absolute_strokes(strokes)
 
     // infer new strokes (and store in predicted_strokes)
     simple_predict.predict();
 
     // accessor for predicted_strokes
-    return simple_predict.output_strokes();
+    return simple_predict.output_strokes_absolute();
 
 }
