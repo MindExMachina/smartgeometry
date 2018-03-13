@@ -1,3 +1,6 @@
+const Html5WebSocket = require('html5-websocket');
+const ReconnectingWebSocket = require('reconnecting-websocket');
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
@@ -5,6 +8,20 @@ var port = process.env.PORT || 8080;
 // configure express body-parser as middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+/**
+ * Websocket server configuration.
+ */
+
+const local = true;
+
+let ws_host = 'smartgeometry.herokuapp.com';
+let ws_port = '80';
+
+if (local) {
+    ws_host = '127.0.0.1';
+    ws_port = '8000';
+}
 
 // routes
 
@@ -100,27 +117,125 @@ app.get('/color/:color', function(req, res) {
 app.listen(port);
 console.log('Server started at http: //localhost:' + port);
 
+// ██╗    ██╗███████╗██████╗ ███████╗ ██████╗  ██████╗██╗  ██╗███████╗████████╗███████╗
+// ██║    ██║██╔════╝██╔══██╗██╔════╝██╔═══██╗██╔════╝██║ ██╔╝██╔════╝╚══██╔══╝██╔════╝
+// ██║ █╗ ██║█████╗  ██████╔╝███████╗██║   ██║██║     █████╔╝ █████╗     ██║   ███████╗
+// ██║███╗██║██╔══╝  ██╔══██╗╚════██║██║   ██║██║     ██╔═██╗ ██╔══╝     ██║   ╚════██║
+// ╚███╔███╔╝███████╗██████╔╝███████║╚██████╔╝╚██████╗██║  ██╗███████╗   ██║   ███████║
+//  ╚══╝╚══╝ ╚══════╝╚═════╝ ╚══════╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝
+
+// Websocket client
 // https://github.com/websockets/ws
 
-const WebSocket = require('ws');
+const options = { constructor: Html5WebSocket };
+const rws = new ReconnectingWebSocket('ws://' + ws_host + ':' + ws_port + '/ws', undefined, options);
+rws.timeout = 1000;
 
-const ws = new WebSocket('ws://smartgeometry.herokuapp.com:80/ws', {});
-
-ws.on('open', function open() {
-    console.log('connected');
-    ws.send('{ "action": "send-message", "params": { "text": "I connected from server.js" } }');
-    ws.send('{ "action": "color-change", "data": { "color": "red" } }');
+rws.addEventListener('open', () => {
+    // console.log('send-strokes');
+    // rws.send('{"method":"send-strokes", "params": {"strokes": [[-3,4,1,0,0],[3,10,1,0,0]]}}');
 });
 
-ws.on('close', function close() {
-    console.log('disconnected');
-    // TODO: reconnect
+rws.addEventListener('message', (e) => {
+    handleMessage(JSON.parse(e.data));
 });
 
-ws.on('message', function incoming(data) {
-
-    var j = JSON.parse(data);
-    console.log('==============');
-    console.log(j.action + ' - ' + JSON.stringify(j.params));
-
+rws.addEventListener('close', () => {
+    console.log('connection closed');
 });
+
+rws.onerror = (err) => {
+    if (err.code === 'EHOSTDOWN') {
+        console.log('server down');
+    }
+};
+
+// █╗  ██╗ █████╗ ███╗   ██╗██████╗ ██╗     ███████╗██████╗ ███████╗
+// ██║  ██║██╔══██╗████╗  ██║██╔══██╗██║     ██╔════╝██╔══██╗██╔════╝
+// ███████║███████║██╔██╗ ██║██║  ██║██║     █████╗  ██████╔╝███████╗
+// ██╔══██║██╔══██║██║╚██╗██║██║  ██║██║     ██╔══╝  ██╔══██╗╚════██║
+// ██║  ██║██║  ██║██║ ╚████║██████╔╝███████╗███████╗██║  ██║███████║
+// ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚══════╝
+
+var verbose = true;
+
+var handleMessage = function(m) {
+    var method = m.method;
+
+    if (method) {
+
+        if (verbose) {
+            console.log('★ Received ' + method + '.');
+        }
+
+        switch (method) {
+            case "send-message":
+                //handleSendMessage(m);
+                break;
+            case "client-id":
+                handleClientId(m);
+                break;
+            case "client-list":
+                //handleClientList(m);
+                break;
+            case "notification":
+                //handleNotification(m);
+                break;
+            case "color-change":
+                //handleColorChange(m);
+                break;
+            case "distribute-strokes":
+                handleDistributeStroke(m);
+                break;
+            case "sketch-rnn:get-prediction:0.0.1":
+                handleSketchRNNGetPrediction001(m);
+                break;
+            default:
+                if (verbose) console.log('(No handler for ' + method + '.)');
+        }
+    }
+}
+
+var handleClientId = function(m) {
+    console.log('Your id is ' + m.params.id);
+}
+
+var handleDistributeStroke = function(m) {
+    // var newStrokes = m.params.strokes;
+    // for (var i in newStrokes) {
+    //     var location = newStrokes[i];
+    //     strokes.push(location);
+    // }
+};
+
+var handleSketchRNNGetPrediction001 = function(m) {
+    console.log('yay! received a request for a prediction');
+    let inputStrokes = m.params.strokes;
+    console.log('------------');
+    console.log('INPUT STROKES');
+    console.log('------------');
+    console.log(inputStrokes);
+    let outputStrokes = sketchRNNGetPrediction(inputStrokes);
+    console.log('------------');
+    console.log('OUTPUT STROKES');
+    console.log('------------');
+    console.log(outputStrokes);
+}
+
+var sketchRNNGetPrediction = function(strokes) {
+
+    var simple_predict = require('./lib/simple_predict');
+
+    // if provided, change input strokes
+    //  if (strokes) {
+    //        var strokes = JSON.parse(strokes);
+    simple_predict.set_strokes(strokes)
+        //}
+
+    // infer new strokes (and store in predicted_strokes)
+    simple_predict.predict();
+
+    // accessor for predicted_strokes
+    return simple_predict.output_strokes();
+
+}

@@ -276,6 +276,33 @@ function distance(x0, y0, x1, y1) {
     return Math.sqrt(dx * dx + dy * dy);
 }
 
+function absolute2relative(strokes) {
+
+    var rStrokes = [];
+    let prev_x, prev_y;
+
+    for (var i in strokes) {
+        let location = strokes[i];
+        let x = strokes[i][0];
+        let y = strokes[i][1];
+        let p1 = strokes[i][2];
+        let p2 = strokes[i][3];
+        let p3 = strokes[i][4];
+
+        let rLocation;
+
+        if (i > 0) {
+            rLocation = [prev_x - x, prev_y - y, p1, p2, p3];
+            rStrokes.push(rLocation);
+        }
+
+        prev_x = x;
+        prev_y = y;
+    }
+
+    return rStrokes;
+}
+
 // Draw SVG graphic of "absolute" strokes
 function getSVG(strokes) {
 
@@ -346,7 +373,7 @@ Mousetrap.bind('command+i', function(e) {
     console.log('predict');
     rws.send(
         '{"method":"sketch-rnn:get-prediction:0.0.1", ' +
-        '"params": {"strokes": ' + JSON.stringify(strokes) + '}' +
+        '"params": {"strokes": ' + JSON.stringify(absolute2relative(strokes)) + '},' +
         '"id": "' + uuid() + '"}');
     return false;
 });
