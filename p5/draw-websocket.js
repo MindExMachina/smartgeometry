@@ -140,7 +140,7 @@ function draw() {
         50 + 20 * mouseY / 500,
         baseB * 255,
         sin(frameCount * 0.01) * 40 + 100);
-    ellipse(mouseX, mouseY, 10, 10);
+    //ellipse(mouseX, mouseY, 10, 10);
 
     var origin_x = 0; //windowWidth * 0.5;
     var origin_y = 0; //windowHeight * 0.5;
