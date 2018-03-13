@@ -1,5 +1,11 @@
 /**
  * p5.js collaborative drawing client.
+ * 
+ * Requirements - this script requires the following libraries:
+ * - Mousetrap
+ * - FileSaver.js
+ * - ReconnectingWebsocket
+ * - p5.js
  */
 
 /**
@@ -18,6 +24,7 @@ uriContent = "data:application/octet-stream," + encodeURIComponent('abcd');
 
 /**
  * Drawing of a Croquetilla with a p5.js flag.
+ * TODO: convert to sketch-rnn syntax
  */
 let croquetilla = [
     [389, 176, 378, 175, 368, 177, 357, 180, 347, 183, 337, 190, 326, 197, 317, 207, 310, 217, 304, 226, 300, 236, 294, 247, 291, 257, 291, 268, 291, 279, 292, 290, 294, 301, 297, 311, 301, 321, 305, 331, 311, 343, 317, 352, 330, 366, 340, 374, 350, 382, 362, 388, 374, 394, 384, 396, 396, 400, 406, 402, 418, 402, 430, 402, 441, 402, 452, 400, 462, 397, 472, 393, 481, 386, 490, 380, 497, 371, 504, 363, 508, 353, 514, 344, 518, 333, 521, 323, 521, 312, 522, 302, 522, 291, 522, 280, 521, 270, 517, 260, 513, 250, 508, 241, 503, 230, 498, 221, 493, 212, 485, 204, 477, 196, 469, 189, 460, 183, 450, 180, 439, 177, 429, 175, 419, 174, 409, 173, 399, 172, 388, 172],
@@ -43,6 +50,7 @@ let croquetilla = [
 
 /**
  * Drawing of a lighthouse.
+ * TODO: convert to sketch-rnn syntax
  */
 let lighthouse = [
     [466, 394, 466, 383, 470, 371, 479, 357, 481, 345, 484, 325, 486, 309, 487, 299, 488, 286, 489, 275, 491, 265, 491, 254, 492, 244, 493, 233, 494, 221, 494, 210, 496, 200, 496, 186, 496, 174, 496, 163, 506, 159, 520, 159, 530, 157, 540, 154, 551, 153, 560, 158, 563, 171, 566, 188, 568, 202, 571, 218, 572, 234, 576, 253, 577, 264, 580, 276, 582, 292, 583, 308, 586, 322, 588, 335, 589, 349, 591, 362, 593, 373, 594, 384, 596, 397, 597, 408, 598, 418],
@@ -76,7 +84,7 @@ let drawingMode = 'SKETCH';
 /**
  * Minimum distance (in pixels) between points in a sketched polyline.
  */
-let tolerance = 10;
+let tolerance = 3;
 
 /**
  * Sketch-rnn drawing variables.
@@ -234,7 +242,7 @@ function mousePressed() {
 }
 
 function mouseReleased() {
-    tryAddPoint(mouseX, mouseY, 0, 1, 0);
+    addPoint(mouseX, mouseY, 0, 1, 0);
     //if(batchsend) {
     //rws.send('{"method":"send-strokes", "params": {"strokes": ' + JSON.stringify(currentStroke) + '}}');
     //}
@@ -245,11 +253,11 @@ function mouseReleased() {
 // Math and graphics helpers
 
 function tryAddPoint(x, y, p1, p2, p3) {
-    //let lastPoint = strokes[strokes.length - 1]
-    //const d = distance(lastPoint[0], lastPoint[1], x, y)
-    //if (d > tolerance) {
-    addPoint(x, y, p1, p2, p3);
-    //}
+    let lastPoint = strokes[strokes.length - 1]
+    const d = distance(lastPoint[0], lastPoint[1], x, y)
+    if (d > tolerance) {
+        addPoint(x, y, p1, p2, p3);
+    }
 
 }
 
