@@ -1,4 +1,22 @@
 /**
+ * p5.js collaborative drawing client.
+ */
+
+/**
+ * Websocket server configuration.
+ */
+
+let host = 'smartgeometry.herokuapp.com';
+let port = '80';
+
+if (true) {
+    host = '127.0.0.1';
+    port = '8000';
+}
+
+uriContent = "data:application/octet-stream," + encodeURIComponent('abcd');
+
+/**
  * Drawing of a Croquetilla with a p5.js flag.
  */
 let croquetilla = [
@@ -95,10 +113,18 @@ function setup() {
     noFill()
 }
 
+let baseR = Math.random();
+let baseG = Math.random();
+let baseB = Math.random();
+
 function draw() {
 
     background(255);
-    background(200 - 20 * mouseX / 500, 50 + 20 * mouseY / 500, 100, sin(frameCount * 0.01) * 40 + 100);
+    background(
+        baseR * 200 - 20 * mouseX / 500,
+        50 + 20 * mouseY / 500,
+        baseB * 255,
+        sin(frameCount * 0.01) * 40 + 100);
     ellipse(mouseX, mouseY, 10, 10);
 
     var origin_x = 0; //windowWidth * 0.5;
@@ -200,9 +226,9 @@ function mousePressed() {
         strokes = []
     } else {
         if (drawingMode == 'POLYLINE') {
-            tryAddPoint(mouseX, mouseY)
+            tryAddPoint(mouseX, mouseY, 1, 0, 0)
         } else if (drawingMode == 'SKETCH') {
-            strokes.push([mouseX, mouseY])
+            addPoint(mouseX, mouseY, 1, 0, 0)
         }
     }
 }
@@ -216,7 +242,7 @@ function mouseReleased() {
     currentStroke = [];
 }
 
-// Math helpers
+// Math and graphics helpers
 
 function tryAddPoint(x, y, p1, p2, p3) {
     //let lastPoint = strokes[strokes.length - 1]
@@ -242,6 +268,83 @@ function distance(x0, y0, x1, y1) {
     return Math.sqrt(dx * dx + dy * dy);
 }
 
+// Draw SVG graphic of "absolute" strokes
+function getSVG(strokes) {
+
+    var s = '<?xml version="1.0" encoding="utf-8"?>';
+    s += '<!-- Generator: Nono.ma p5.js drawing client -->';
+    s += '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" ' +
+        'xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" ' +
+        'viewBox="0 0 ' + windowWidth + ' ' + windowHeight + '" ' +
+        'style="enable-background:new 0 0 ' + windowWidth + ' ' + windowHeight + ';" ' +
+        'xml:space="preserve">';
+    s += '<style type="text/css">.o-line-0{fill:none;stroke:#000000;stroke-width:3;}</style>';
+
+
+    var prev_location;
+    var model_prev_pen = [1, 0, 0];
+
+    for (var i = 0; i < strokes.length; i++) {
+
+        if (i == 0 || model_prev_pen[1] == 1) {
+            s += '<polyline class="o-line-0" points = "';
+        }
+
+        var location = strokes[i];
+
+        let x = location[0];
+        let y = location[1];
+        let model_pen_down = location[2];
+        let model_pen_up = location[3];
+        let model_pen_end = location[4];
+
+        // Not needed since we are iteration on points (not on the model)
+        if (model_prev_pen[2] == 1) {
+            break;
+        }
+
+        if (i > 0) {
+            s += ' ';
+        }
+        s += x + ',' + y;
+
+        if (model_pen_up == 1) {
+            // TODO: set this globally
+            s += '" style = "fill:none;stroke:black;stroke-width:3"/>';
+        }
+
+        model_prev_pen[0] = model_pen_down;
+        model_prev_pen[1] = model_pen_up;
+        model_prev_pen[2] = model_pen_end;
+
+        prev_location = location;
+    }
+    s += '</svg>';
+    return s;
+}
+
+/**
+ * Keyboard shortcuts with Mousetrap
+ * https://github.com/ccampbell/mousetrap 
+ */
+
+Mousetrap.bind('command+s', function(e) {
+    console.log('save');
+    saveSVG(strokes);
+    return false;
+});
+
+function saveSVG(strokes) {
+    var svg = getSVG(strokes);
+    var blob = new Blob([svg], { type: "image/svg+xml" });
+    saveAs(blob, "drawing.svg");
+}
+
+function saveText(s) {
+    var blob = new Blob([s], { type: "text/plain;charset=utf-8" });
+    saveAs(blob, "draw.txt");
+}
+
 // ██╗    ██╗███████╗██████╗ ███████╗ ██████╗  ██████╗██╗  ██╗███████╗████████╗███████╗
 // ██║    ██║██╔════╝██╔══██╗██╔════╝██╔═══██╗██╔════╝██║ ██╔╝██╔════╝╚══██╔══╝██╔════╝
 // ██║ █╗ ██║█████╗  ██████╔╝███████╗██║   ██║██║     █████╔╝ █████╗     ██║   ███████╗
@@ -250,7 +353,7 @@ function distance(x0, y0, x1, y1) {
 //  ╚══╝╚══╝ ╚══════╝╚═════╝ ╚══════╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝
 
 //const options = { constructor: Html5WebSocket };
-const rws = new ReconnectingWebSocket('ws://smartgeometry.herokuapp.com:80/ws', undefined, {});
+const rws = new ReconnectingWebSocket('ws://' + host + ':' + port + '/ws', undefined, {});
 rws.timeout = 1000;
 
 rws.addEventListener('open', () => {
