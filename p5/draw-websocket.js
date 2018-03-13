@@ -75,6 +75,12 @@ let lighthouse = [
 let strokes = [];
 
 /**
+ * An stream of incoming strokes to draw, sketched from
+ * other clients.
+ */
+let incomingStrokes = [];
+
+/**
  * The stroke that is currently being drawn by the user.
  */
 let currentStroke = [];
@@ -453,9 +459,23 @@ var handleDistributeStroke = function(m) {
     console.log(newStrokes);
     for (var i in newStrokes) {
         var location = newStrokes[i];
-        strokes.push(location);
+        incomingStrokes.push(location);
     }
 };
+
+let incomingStrokesProcessor;
+
+let processIncomingStrokes = function() {
+    incomingStrokesProcessor = setInterval(function() {
+        var i = 0;
+        while (incomingStrokes.length && i < 2) {
+            strokes.push(incomingStrokes.shift());
+            i++;
+        }
+    }, 25);
+};
+
+processIncomingStrokes();
 
 var handleMessage = function(m) {
     var method = m.method;
