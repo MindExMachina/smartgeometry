@@ -247,6 +247,9 @@ function mousePressed() {
     }
 }
 
+let instantPrediction = true;
+let predictionInputStrokes = [];
+
 function mouseReleased() {
     addPoint(mouseX, mouseY, 0, 1, 0);
     //if(batchsend) {
@@ -254,6 +257,11 @@ function mouseReleased() {
     //}
     rws.send('{"method":"send-message", "params": {"text": "mouse was released"}}');
     currentStroke = [];
+
+    if (instantPrediction) {
+        requestPrediction(predictionInputStrokes);
+        predictionInputStrokes = [];
+    }
 }
 
 // Math and graphics helpers
@@ -273,6 +281,7 @@ function addPoint(x, y, p1, p2, p3) {
         var location = [x, y, p1, p2, p3];
         strokes.push(location);
         currentStroke.push(location);
+        predictionInputStrokes.push(location);
         //if (instantsend) {
         rws.send('{"method":"send-strokes", "params": {"strokes": [' + JSON.stringify(location) + ']}}');
         //}
@@ -384,14 +393,13 @@ Mousetrap.bind('command+s', function(e) {
 
 Mousetrap.bind('command+i', function(e) {
     console.log('predict');
-    requestPrediction();
+    requestPrediction(strokes);
     return false;
 });
 
-var requestPrediction = function() {
+var requestPrediction = function(strokes) {
     rws.send(
         '{"method":"sketch-rnn:get-prediction:0.0.1", ' +
-        //'"params": {"strokes": ' + JSON.stringify(absolute2relative(strokes)) + '},' +
         '"params": {"strokes": ' + JSON.stringify(strokes) + '},' +
         '"id": "' + uuid() + '"}');
 }
@@ -515,13 +523,13 @@ var handleMessage = function(m) {
 document.body.innerHTML +=
     '<div id="button-clear" style="position:absolute;border-radius:10px;display:block;left:140px;bottom:20px;background-color:white;width:100px;height:50px">clear</div>';
 
-document.body.innerHTML +=
-    '<div id="button-infer" style="position:absolute;border-radius:10px;left:20px;bottom:20px;background-color:white;width:100px;height:50px">infer</div>';
-document.getElementById('button-infer').onclick = function(e) {
-    requestPrediction();
-    e.preventDefault();
-    return false;
-};
+//document.body.innerHTML +=
+// '<div id="button-infer" style="position:absolute;border-radius:10px;left:20px;bottom:20px;background-color:white;width:100px;height:50px">infer</div>';
+// document.getElementById('button-infer').onclick = function(e) {
+// requestPrediction();
+//     e.preventDefault();
+//     return false;
+// };
 
 document.getElementById('button-clear').onclick = function(e) {
     strokes = [];

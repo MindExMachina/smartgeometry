@@ -231,6 +231,8 @@ var uuid = function() {
     return 'placeholder-uuid-node-server';
 }
 
+var simple_predict = require('./lib/simple_predict');
+
 /**
  * Get a prediction on how to continue a sketch
  * using Google's Sketch RNN.
@@ -238,8 +240,6 @@ var uuid = function() {
  * @param [[dx, dy, p1, p2, p3], […]] strokes 
  */
 var sketchRNNGetPrediction = function(strokes) {
-
-    var simple_predict = require('./lib/simple_predict');
 
     simple_predict.set_absolute_strokes(strokes)
 

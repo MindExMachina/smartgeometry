@@ -41,6 +41,17 @@ var model_x, model_y;
 // output
 var predicted_strokes;
 
+module.exports.load_sketch_rnn = function() {
+    sk = require('./sketch_rnn.js');
+}
+
+module.exports.load_bird_model = function() {
+    bird_model = require('./models/bird.gen.js');
+    model_raw_data = bird_model.model_raw_data;
+}
+
+module.exports.load_model
+
 module.exports.output_strokes = function() {
     return predicted_strokes;
 };
