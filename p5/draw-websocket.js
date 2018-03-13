@@ -6,21 +6,22 @@
  * - FileSaver.js
  * - ReconnectingWebsocket
  * - p5.js
+ * - github.com/kelektiv/node-uuid
  */
 
 /**
  * Websocket server configuration.
  */
 
+const local = true;
+
 let host = 'smartgeometry.herokuapp.com';
 let port = '80';
 
-if (true) {
+if (local) {
     host = '127.0.0.1';
     port = '8000';
 }
-
-uriContent = "data:application/octet-stream," + encodeURIComponent('abcd');
 
 /**
  * Drawing of a Croquetilla with a p5.js flag.
@@ -218,7 +219,6 @@ function drawRelativeStrokes() {
         model_prev_pen[0] = model_pen_down;
         model_prev_pen[1] = model_pen_up;
         model_prev_pen[2] = model_pen_end;
-
     }
 
 }
@@ -341,6 +341,19 @@ Mousetrap.bind('command+s', function(e) {
     saveSVG(strokes);
     return false;
 });
+
+Mousetrap.bind('command+i', function(e) {
+    console.log('predict');
+    rws.send(
+        '{"method":"sketch-rnn:get-prediction:0.0.1", ' +
+        '"params": {"strokes": ' + JSON.stringify(strokes) + '}' +
+        '"id": "' + uuid() + '"}');
+    return false;
+});
+
+/**
+ * FileSaver helpers
+ */
 
 function saveSVG(strokes) {
     var svg = getSVG(strokes);
