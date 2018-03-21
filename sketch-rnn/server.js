@@ -1,13 +1,45 @@
+// Copyright 2018 Nono Martínez Alonso (Nono.ma)
+//
+// The MIT License
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+/**
+ * Author: Nono Martínez Alonso <mail@nono.ma>
+ *
+ * @fileoverview SketchRNN as a service over HTTP and WebSockets.
+ */
+
+// Load WebSocket dependencies
 const Html5WebSocket = require('html5-websocket');
 const ReconnectingWebSocket = require('reconnecting-websocket');
 
+// Load HTTP server dependencies
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var port = process.env.PORT || 8080;
-// configure express body-parser as middleware
+// Configure express body-parser as middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// Load sketch-rnn simple predict module
+var simple_predict = require('./lib/simple_predict');
 
 /**
  * Websocket server configuration.
@@ -23,16 +55,26 @@ if (local) {
     ws_port = '8000';
 }
 
+// ██╗  ██╗████████╗████████╗██████╗ 
+// ██║  ██║╚══██╔══╝╚══██╔══╝██╔══██╗
+// ███████║   ██║      ██║   ██████╔╝
+// ██╔══██║   ██║      ██║   ██╔═══╝ 
+// ██║  ██║   ██║      ██║   ██║     
+// ╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚═╝     
+
 /**
  * Express HTTP server routes.
  */
 
+/**
+ * A POST route to request a prediction from SketchRNN.
+ */
 app.post('/simple_predict', function(req, res) {
 
     // Load simple_predict.js module
-    var simple_predict = require('./lib/simple_predict');
+    //var simple_predict = require('./lib/simple_predict');
 
-    // Get strokes from post parameters
+    // Get strokes from the POST request's parameters
     var strokes = req.body.strokes;
 
     // If strokes are provided on the request,
@@ -53,62 +95,43 @@ app.post('/simple_predict', function(req, res) {
 
 });
 
+/**
+ * A GET route to request a prediction from SketchRNN.
+ * 
+ * e.g, http://localhost:8080/simple_predict?strokes=[[-4,0,1,0,0],[-15,9,1,0,0],[-10,17,1,0,0],[-1,28,1,0,0]]
+ */
+app.get('/simple_predict', function(req, res) {
 
+    // Load simple_predict.js module
+    //var simple_predict = require('./lib/simple_predict');
 
-
-// http://localhost:8080/infer?strokes=[[-4,0,1,0,0],[-15,9,1,0,0],[-10,17,1,0,0],[-1,28,1,0,0]]
-app.get('/infer', function(req, res) {
-
-    // parse strokes from url
+    // Get strokes from the GET request's parameters
     var strokes = req.param('strokes');
 
-    var simple_predict = require('./lib/simple_predict');
-    // if provided, change input strokes
+    // If strokes are provided on the request,
+    // set them as input strokes for simple_predict
     if (strokes) {
         var strokes = JSON.parse(strokes);
         simple_predict.set_strokes(strokes)
     }
-    // infer new strokes (and store in predicted_strokes)
+
+    // Request a sketch prediction
     simple_predict.predict();
-    // accessor for predicted_strokes
+
+    // Get the predicted strokes
     var predicted_strokes = simple_predict.output_strokes();
 
+    // Return the predicted strokes in the response
     res.json(predicted_strokes);
 });
 
-
-
-app.get('/', function(req, res) {
-    var str = sketchrnn.talk();
-    res.send(str);
-});
-
-// sample GET request that receives an array of strokes
-// e.g. http://localhost:8080/get?strokes=[[4,5,0,3,2],[4,5,0,3,0]]
-app.get('/get', function(req, res) {
-    var strokes = req.param('strokes');
-    var strokes = JSON.parse(strokes);
-    var increment = req.param('i') || 1;
-
-    for (var i in strokes) {
-        var components = strokes[i];
-        for (var j in components) {
-            var component = components[j];
-            components[j] = parseInt(component) + parseInt(increment);
-        }
-    }
-    ws.send(JSON.stringify({ action: "strokes-0.0.1", params: { strokes: strokes } }));
-    res.json(strokes);
-});
-
-app.get('/color/:color', function(req, res) {
-    var m = '{ "action": "color-change", "data": { "color": "' + req.params.color + '" } }';
-    ws.send(m);
-    res.json(JSON.parse(m));
-});
+/**
+ * Start the HTTP server.
+ */
 
 app.listen(port);
-console.log('Server started at http: //localhost:' + port);
+console.log('Server started at http://localhost:' + port);
+
 
 // ██╗    ██╗███████╗██████╗ ███████╗ ██████╗  ██████╗██╗  ██╗███████╗████████╗███████╗
 // ██║    ██║██╔════╝██╔══██╗██╔════╝██╔═══██╗██╔════╝██║ ██╔╝██╔════╝╚══██╔══╝██╔════╝
@@ -117,16 +140,12 @@ console.log('Server started at http: //localhost:' + port);
 // ╚███╔███╔╝███████╗██████╔╝███████║╚██████╔╝╚██████╗██║  ██╗███████╗   ██║   ███████║
 //  ╚══╝╚══╝ ╚══════╝╚═════╝ ╚══════╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝
 
-// Websocket client
-// https://github.com/websockets/ws
-
 const options = { constructor: Html5WebSocket };
 const rws = new ReconnectingWebSocket('ws://' + ws_host + ':' + ws_port + '/ws', undefined, options);
 rws.timeout = 1000;
 
 rws.addEventListener('open', () => {
-    // console.log('send-strokes');
-    // rws.send('{"method":"send-strokes", "params": {"strokes": [[-3,4,1,0,0],[3,10,1,0,0]]}}');
+    // ...
 });
 
 rws.addEventListener('message', (e) => {
@@ -224,8 +243,6 @@ var uuid = function() {
     return 'placeholder-uuid-node-server';
 }
 
-var simple_predict = require('./lib/simple_predict');
-
 /**
  * Get a prediction on how to continue a sketch
  * using Google's Sketch RNN.
@@ -239,7 +256,7 @@ var sketchRNNGetPrediction = function(strokes) {
     // infer new strokes (and store in predicted_strokes)
     simple_predict.predict();
 
-    // accessor for predicted_strokes
+    // get predicted_strokes
     return simple_predict.output_strokes_absolute();
 
 }
