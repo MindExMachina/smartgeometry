@@ -4,6 +4,11 @@ This should return some like the following.
 - Detect faces in an image
 - [Create a custom classifier](https://console.bluemix.net/docs/services/visual-recognition/tutorial-custom-classifier.html)
 
+## External links
+
+- [Best practices for custom classifiers](https://www.ibm.com/blogs/bluemix/2016/10/watson-visual-recognition-training-best-practices/) (Blog post)
+- [Building Cognitive Applications: Visual Recognition (IBM Redbooks)](http://www.redbooks.ibm.com/redbooks/pdfs/sg248393.pdf) (PDF)
+
 ## Classify an image
 
 ```bash
