@@ -23,7 +23,38 @@ if (local) {
     ws_port = '8000';
 }
 
-// routes
+/**
+ * Express HTTP server routes.
+ */
+
+app.post('/simple_predict', function(req, res) {
+
+    // Load simple_predict.js module
+    var simple_predict = require('./lib/simple_predict');
+
+    // Get strokes from post parameters
+    var strokes = req.body.strokes;
+
+    // If strokes are provided on the request,
+    // set them as input strokes for simple_predict
+    if (strokes) {
+        var strokes = JSON.parse(strokes);
+        simple_predict.set_strokes(strokes)
+    }
+
+    // Request a sketch prediction
+    simple_predict.predict();
+
+    // Get the predicted strokes
+    var predicted_strokes = simple_predict.output_strokes();
+
+    // Return the predicted strokes in the response
+    res.json(predicted_strokes);
+
+});
+
+
+
 
 // http://localhost:8080/infer?strokes=[[-4,0,1,0,0],[-15,9,1,0,0],[-10,17,1,0,0],[-1,28,1,0,0]]
 app.get('/infer', function(req, res) {
@@ -45,25 +76,7 @@ app.get('/infer', function(req, res) {
     res.json(predicted_strokes);
 });
 
-// http://localhost:8080/infer?strokes=[[-4,0,1,0,0],[-15,9,1,0,0],[-10,17,1,0,0],[-1,28,1,0,0]]
-app.post('/infer', function(req, res) {
 
-    // parse strokes from url
-    var strokes = req.body.strokes;
-
-    var simple_predict = require('./lib/simple_predict');
-    // if provided, change input strokes
-    if (strokes) {
-        var strokes = JSON.parse(strokes);
-        simple_predict.set_strokes(strokes)
-    }
-    // infer new strokes (and store in predicted_strokes)
-    simple_predict.predict();
-    // accessor for predicted_strokes
-    var predicted_strokes = simple_predict.output_strokes();
-
-    res.json(predicted_strokes);
-});
 
 app.get('/', function(req, res) {
     var str = sketchrnn.talk();
@@ -85,26 +98,6 @@ app.get('/get', function(req, res) {
         }
     }
     ws.send(JSON.stringify({ action: "strokes-0.0.1", params: { strokes: strokes } }));
-    res.json(strokes);
-});
-
-// same thing as a POST request
-app.post('/post', function(req, res) {
-
-    console.log(req.body.strokes);
-
-    var strokes = req.body.strokes;
-    var strokes = JSON.parse(strokes);
-    var increment = req.param('i') || 1;
-
-    for (var i in strokes) {
-        var components = strokes[i];
-        for (var j in components) {
-            var component = components[j];
-            components[j] = parseInt(component) + parseInt(increment);
-        }
-    }
-
     res.json(strokes);
 });
 
