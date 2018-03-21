@@ -9,6 +9,12 @@ recognize_face:
 	@curl -X POST --form "images_file=@prez.jpg" \
 	"https://gateway-a.watsonplatform.net/visual-recognition/api/v3/detect_faces?api_key=$(API_KEY)&version=2016-05-20"
 
+classify_circle:
+	@curl -X POST --form "images_file=@circle.png" \
+	--form "parameters=@myparams.json" \
+	"https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classify?api_key=$(API_KEY)&version=2016-05-20"
+
+
 create_dogs_classifier:
 	@curl -X POST \
 	--form "beagle_positive_examples=@beagle.zip" \
@@ -17,3 +23,14 @@ create_dogs_classifier:
 	--form "negative_examples=@cats.zip" \
 	--form "name=dogs" \
 	"https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers?api_key=$(API_KEY)&version=2016-05-20"
+
+create_square_circle_classifier:
+	@curl -X POST \
+	--form "circle_positive_examples=@models/circle.zip" \
+	--form "square_positive_examples=@models/square.zip" \
+	--form "name=circle_or_square" \
+	"https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers?api_key=$(API_KEY)&version=2016-05-20"	
+
+training_status:
+	@curl -X GET \
+	"https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers/circle_or_square_138209706?api_key=$(API_KEY)&version=2016-05-20"

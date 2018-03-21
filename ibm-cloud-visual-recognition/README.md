@@ -114,3 +114,36 @@ This should return some like the following.
     "images_processed": 1
 }
 ```
+
+## Creating your own classifier
+
+```bash
+make create_circle_square_classifier
+```
+
+```json
+{
+    "classifier_id": "circle_or_square_138209706",
+    "name": "circle_or_square",
+    "status": "training",
+    "owner": "cbaacf2e-3e08-4ac6-939b-8e24abac56f7",
+    "created": "2018-03-21T04:39:45.763Z",
+    "updated": "2018-03-21T04:39:45.763Z",
+    "classes": [
+        {
+            "class": "square"
+        },
+        {
+            "class": "circle"
+        }
+    ],
+    "core_ml_enabled": true
+}
+```
+
+Your classifier should start training. You can check its status (and will know its done when status turns to `ready` from `training`.)
+
+```bash
+curl -X GET \
+"https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers/{classifier_id}?api_key={api_key}&version=2016-05-20"
+```
