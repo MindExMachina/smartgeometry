@@ -1,6 +1,10 @@
 This should return some like the following.
 
-## Visual recognition
+- Classify an image
+- Detect faces in an image
+- [Create a custom classifier](https://console.bluemix.net/docs/services/visual-recognition/tutorial-custom-classifier.html)
+
+## Classify an image
 
 ```bash
 make classify_fruits
@@ -63,7 +67,7 @@ This should return some like the following.
 }
 ```
 
-## Face recognition
+## Detect faces in an image
 
 ```bash
 make recognize_face
