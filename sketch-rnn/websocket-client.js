@@ -29,15 +29,6 @@
 const Html5WebSocket = require('html5-websocket');
 const ReconnectingWebSocket = require('reconnecting-websocket');
 
-// Load HTTP server dependencies
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
-var port = process.env.PORT || 8080;
-// Configure express body-parser as middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
 // Load sketch-rnn simple predict module
 var simple_predict = require('./lib/simple_predict');
 
@@ -54,84 +45,6 @@ if (local) {
     ws_host = '127.0.0.1';
     ws_port = '8000';
 }
-
-// ██╗  ██╗████████╗████████╗██████╗ 
-// ██║  ██║╚══██╔══╝╚══██╔══╝██╔══██╗
-// ███████║   ██║      ██║   ██████╔╝
-// ██╔══██║   ██║      ██║   ██╔═══╝ 
-// ██║  ██║   ██║      ██║   ██║     
-// ╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚═╝     
-
-/**
- * Express HTTP server routes.
- */
-
-/**
- * A POST route to request a prediction from SketchRNN.
- */
-app.post('/simple_predict', function(req, res) {
-
-    // Load simple_predict.js module
-    //var simple_predict = require('./lib/simple_predict');
-
-    // Get strokes from the POST request's parameters
-    var strokes = req.body.strokes;
-
-    // If strokes are provided on the request,
-    // set them as input strokes for simple_predict
-    if (strokes) {
-        var strokes = JSON.parse(strokes);
-        simple_predict.set_strokes(strokes)
-    }
-
-    // Request a sketch prediction
-    simple_predict.predict();
-
-    // Get the predicted strokes
-    var predicted_strokes = simple_predict.output_strokes();
-
-    // Return the predicted strokes in the response
-    res.json(predicted_strokes);
-
-});
-
-/**
- * A GET route to request a prediction from SketchRNN.
- * 
- * e.g, http://localhost:8080/simple_predict?strokes=[[-4,0,1,0,0],[-15,9,1,0,0],[-10,17,1,0,0],[-1,28,1,0,0]]
- */
-app.get('/simple_predict', function(req, res) {
-
-    // Load simple_predict.js module
-    //var simple_predict = require('./lib/simple_predict');
-
-    // Get strokes from the GET request's parameters
-    var strokes = req.param('strokes');
-
-    // If strokes are provided on the request,
-    // set them as input strokes for simple_predict
-    if (strokes) {
-        var strokes = JSON.parse(strokes);
-        simple_predict.set_strokes(strokes)
-    }
-
-    // Request a sketch prediction
-    simple_predict.predict();
-
-    // Get the predicted strokes
-    var predicted_strokes = simple_predict.output_strokes();
-
-    // Return the predicted strokes in the response
-    res.json(predicted_strokes);
-});
-
-/**
- * Start the HTTP server.
- */
-
-app.listen(port);
-console.log('Server started at http://localhost:' + port);
-
 
 // ██╗    ██╗███████╗██████╗ ███████╗ ██████╗  ██████╗██╗  ██╗███████╗████████╗███████╗
 // ██║    ██║██╔════╝██╔══██╗██╔════╝██╔═══██╗██╔════╝██║ ██╔╝██╔════╝╚══██╔══╝██╔════╝
