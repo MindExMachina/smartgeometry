@@ -1,3 +1,5 @@
+# Watson Visual Recognition Service (IBM Cloud)
+
 This should return some like the following.
 
 - Classify an image

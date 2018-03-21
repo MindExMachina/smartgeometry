@@ -14,7 +14,6 @@ classify_circle:
 	--form "parameters=@myparams.json" \
 	"https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classify?api_key=$(API_KEY)&version=2016-05-20"
 
-
 create_dogs_classifier:
 	@curl -X POST \
 	--form "beagle_positive_examples=@beagle.zip" \
