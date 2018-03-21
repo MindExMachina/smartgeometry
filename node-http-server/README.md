@@ -1,11 +1,31 @@
 A minimal node http server using Express.
 
+Start the Express server.
+
 ```bash
 node server.js
 ```
 
-Then make a POST request.
+You should see the URL at which the server is running (e.g., `http://localhost:8080`).
+
+You can try that the routes are working with the following `make` commands defined on the `Makefile`. (And you can also try the GET requests on your browser — POST requests won't work in the browser.)
 
 ```bash
 make post
+```
+
+```bash
+make post_numbers
+```
+
+```bash
+make get
+```
+
+```bash
+make get_numbers
+```
+
+```bash
+make get_color
 ```
