@@ -33,3 +33,7 @@ create_square_circle_classifier:
 training_status:
 	@curl -X GET \
 	"https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers/circle_or_square_138209706?api_key=$(API_KEY)&version=2016-05-20"
+
+download_mlmodel:
+	@curl --output circle_or_square_138209706.mlmodel \
+	"https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers/circle_or_square_138209706/core_ml_model?api_key=$(API_KEY)&version=2016-05-20"
