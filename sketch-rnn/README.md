@@ -4,6 +4,12 @@ SketchRNN as a service. Get drawing predictions from a set of strokes using an H
 
 ## HTTP server
 
+Make sure all the necessary modules are installed:
+
+```bash
+npm i
+```
+
 Start the HTTP server.
 
 ```bash
