@@ -29,7 +29,7 @@ float prev_y = 0;
 int clickCount = 0;
 
 void keyPressed() {
-  if(keyCode == 83) {
+  if(key == 'p' || key == 'P') {
   
     prettyPrint(strokes);
     
