@@ -1,0 +1,21 @@
+{
+  "name": "bridge",
+  "version": "1.0.0",
+  "description": "dynamo cloud extension coordinator",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "bufferutil": "3.0.3",
+    "express": "^4.16.3",
+    "npm": "^5.7.1",
+    "reconnecting-websocket": "^3.2.2",
+    "utf-8-validate": "4.0.0",
+    "ws": "5.0.0"
+  }
+}
