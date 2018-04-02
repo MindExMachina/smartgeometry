@@ -33,7 +33,7 @@ const uuid = require('uuid');
 // Configuration
 
 let verbose = true;
-const local = false;
+const local = true;
 
 let ws_host = 'smartgeometry.herokuapp.com';
 let ws_port = '80';
