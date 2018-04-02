@@ -27,6 +27,7 @@ var bird_model = require('./models/bird.gen.json');
 // Quick and dirty: sketch-rnn works with stringified json objects, while required ones are already parsed.
 // So... to avoid changing sketch-rnn for the time being, he rehuff the json object, to let sketch-rnn repuff it XD
 var model_raw_data = JSON.stringify(bird_model);  
+// var model_raw_data = bird_model.model_raw_data;
 
 // sketch_rnn model
 var model;
