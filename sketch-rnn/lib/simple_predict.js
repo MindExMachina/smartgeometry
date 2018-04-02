@@ -23,10 +23,10 @@
  */
 
 var sk = require('./sketch_rnn.js');
-var bird_model = require('./models/bird.gen.json');
+var model = require('./models/bird.gen.json');
 // Quick and dirty: sketch-rnn works with stringified json objects, while required ones are already parsed.
 // So... to avoid changing sketch-rnn for the time being, he rehuff the json object, to let sketch-rnn repuff it XD
-var model_raw_data = JSON.stringify(bird_model);  
+var model_raw_data = JSON.stringify(model);  
 // var model_raw_data = bird_model.model_raw_data;
 
 // sketch_rnn model
@@ -48,12 +48,10 @@ module.exports.load_sketch_rnn = function() {
     sk = require('./sketch_rnn.js');
 }
 
-module.exports.load_bird_model = function() {
-    bird_model = require('./models/bird.gen.js');
+module.exports.load_model = function(model_name) {
+    let model = require('./models/' + model_name + '.gen.js');
     model_raw_data = JSON.stringify(bird_model);
 }
-
-module.exports.load_model
 
 module.exports.output_strokes = function() {
     return predicted_strokes;

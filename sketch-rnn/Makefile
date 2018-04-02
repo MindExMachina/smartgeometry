@@ -1,3 +1,5 @@
+API_KEY=;alsjfpoaisfasfjas;lfkjas;dlkfaf
+
 post:
 	@echo "Processing POST prediction request.."
 	@curl \

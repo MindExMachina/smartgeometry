@@ -33,6 +33,12 @@ var port = process.env.PORT || 8080;
 // Configure express body-parser as middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+// Allow CORS (cross-origin) requests
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 // Load sketch-rnn simple predict module
 var simple_predict = require('./lib/simple_predict');
@@ -50,6 +56,7 @@ var simple_predict = require('./lib/simple_predict');
 
 /**
  * A POST route to request a prediction from SketchRNN.
+ * (from a relative set of strokes).
  */
 app.post('/simple_predict', function(req, res) {
 
@@ -71,6 +78,36 @@ app.post('/simple_predict', function(req, res) {
 
     // Get the predicted strokes
     var predicted_strokes = simple_predict.output_strokes();
+
+    // Return the predicted strokes in the response
+    res.json(predicted_strokes);
+
+});
+
+/**
+ * A POST route to request a prediction from SketchRNN
+ * (from an absolute set of strokes).
+ */
+app.post('/simple_predict_absolute', function(req, res) {
+
+    // Load simple_predict.js module
+    //var simple_predict = require('./lib/simple_predict');
+
+    // Get strokes from the POST request's parameters
+    var strokes = req.body.strokes;
+
+    // If strokes are provided on the request,
+    // set them as input strokes for simple_predict
+    if (strokes) {
+        var strokes = JSON.parse(strokes);
+        simple_predict.set_absolute_strokes(strokes)
+    }
+
+    // Request a sketch prediction
+    simple_predict.predict();
+
+    // Get the predicted strokes
+    var predicted_strokes = simple_predict.output_strokes_absolute();
 
     // Return the predicted strokes in the response
     res.json(predicted_strokes);

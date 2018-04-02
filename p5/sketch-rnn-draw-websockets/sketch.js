@@ -488,7 +488,10 @@
 
  var handleDistributeStroke = function(m) {
      var newStrokes = m.params.strokes;
+     // Fix first stroke to not draw connecting line
+     newStrokes[0] = [newStrokes[0][1], newStrokes[0][1], 0, 1, 0];
      console.log(newStrokes);
+     // Queue all new strokes for animation
      for (var i in newStrokes) {
          var location = newStrokes[i];
          incomingStrokes.push(location);
