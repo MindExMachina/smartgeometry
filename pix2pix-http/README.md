@@ -6,8 +6,8 @@ Feed and output image and generate an output image using different models over h
 
 ## Requirements
 
-- TensorFlow
-- Pix2pix
+- [TensorFlow](https://www.tensorflow.org/install/) (>= 1.4.1)
+- [pix2pix](https://github.com/affinelayer/pix2pix-tensorflow)
 - Set the `PIX2PIX_PROCESSLOCALPY` environment variable (in the `.env` file) path to your pix2pix `process-local.py` path (i.e., `pix2pix-tensorflow/server/tools/process-local.py`).
 
 ## Usage
