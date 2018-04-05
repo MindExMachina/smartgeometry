@@ -53,7 +53,7 @@ func postProcessImageBlurHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Copy image
 
-	f, err := copyFile(w, r, "images_file", "./tmp")
+	f, err := copyFile(w, r, "image_file", "./tmp")
 	if err == nil {
 		// ..
 	}
@@ -105,7 +105,7 @@ func postPix2pixHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Copy image
 
-	f, err := copyFile(w, r, "images_file", "./tmp")
+	f, err := copyFile(w, r, "image_file", "./tmp")
 	if err == nil {
 		// ..
 	}

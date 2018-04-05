@@ -4,10 +4,32 @@ pix2pix as an http service.
 
 Feed and output image and generate an output image using different models over http requests.
 
-Run the server on `127.0.0.1`.
+## Requirements
+
+- TensorFlow
+- Pix2pix
+- Set the `PIX2PIX_PROCESSLOCALPY` environment variable (in the `.env` file) path to your pix2pix `process-local.py` path (i.e., `pix2pix-tensorflow/server/tools/process-local.py`).
+
+## Usage
+
+Run the http server at `127.0.0.1`.
 
 ```
 go run *.go
+```
+
+The server provides two POST routes.
+
+- `/pix` · POST Route that gets an input `image_file` and a `model_path` and retrieves a generated pix2pix output image using the pix2pix model at `model_path` and the provided `image_file`.
+  - @param `image_file` · a PNG input image file of 256x256 pixels.
+  - @param `model_path` · the path to a pix2pix `model_export/` exported model.
+  - @output `image` · bytes of the PNG output image (also 256x256 pixels).
+- `/blur` · (Test) POST route that gets an input image and retrieves it blurred with the provided `sigma`.
+
+## Sample POST curl command
+
+```
+make pix path=/path/to/models/170331_pix-08-edges2sunflowers-200e/model_export
 ```
 
 ## Makefile
