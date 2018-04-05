@@ -8,7 +8,7 @@ Machine intelligence services to design robot-human-ai interactions.
 - sketch-rnn [http](https://github.com/nonoesp/smartgeometry/blob/master/sketch-rnn/http-server.js) [ws](https://github.com/nonoesp/smartgeometry/blob/master/sketch-rnn/websocket-client.js) [js](https://github.com/nonoesp/smartgeometry/blob/master/sketch-rnn/lib/simple_predict.js)
 - pix2pix [http](https://github.com/nonoesp/smartgeometry/tree/master/pix2pix-http) [python](https://github.com/affinelayer/pix2pix-tensorflow)
 - visual recognition [http](https://github.com/nonoesp/smartgeometry/tree/master/ibm-visual-recognition) [coreml](https://github.com/nonoesp/smartgeometry/tree/master/ibm-visual-recognition/CoreMLSwift-CircleOrSquare)
-- yolo [c++]()
+- yolo [c++](https://pjreddie.com/darknet/yolo/)
 
 ## Resources
 
