@@ -10,15 +10,15 @@ A sample use of Watson Tone Analyzer.
 
 ## Analyzing the tone of a Sentence
 
+## Sample POST requests
+
+Run `make analyze`.
+
 ```
-analyze:
-	@echo ""
-	@curl -X POST --user "$(USERNAME)":"$(PASSWORD)" \
-	--header "Content-Type: application/json" \
-	--data-binary @tone.json \
-	"$(BASE_URL)/v3/tone?version=2017-09-21"
-	@echo ""
-	@echo ""
+curl -X POST --user "$(USERNAME)":"$(PASSWORD)" \
+--header "Content-Type: application/json" \
+--data-binary @tone.json \
+"$(BASE_URL)/v3/tone?version=2017-09-21"
 ```
 
 This request uses `tone.json`.
@@ -29,15 +29,13 @@ This request uses `tone.json`.
 }
 ```
 
+Run `make analyze2`.
+
 ```
-analyze2:
-	@echo ""
-	@curl -X POST --user "$(USERNAME)":"$(PASSWORD)" \
-	--header "Content-Type: application/json" \
-	--data-binary @tone2.json \
-	"$(BASE_URL)/v3/tone?version=2017-09-21"
-	@echo ""
-	@echo ""
+curl -X POST --user "$(USERNAME)":"$(PASSWORD)" \
+--header "Content-Type: application/json" \
+--data-binary @tone2.json \
+"$(BASE_URL)/v3/tone?version=2017-09-21"
 ```
 
 This request uses `tone.json`.
@@ -46,4 +44,14 @@ This request uses `tone.json`.
 {
     "text": "Wow guys, our cluster just got accepted to SmartGeometry!"
 }
+```
+
+### Sample GET request
+
+Run `make get`.
+
+```
+curl -X GET --user "$(USERNAME)":"$(PASSWORD)" \
+"$(BASE_URL)/v3/tone?version=2017-09-21\
+&text=I%20think%20I%20am%20going%20to%20%20like%20this."
 ```
