@@ -38,11 +38,45 @@ curl -X POST --user "$(USERNAME)":"$(PASSWORD)" \
 "$(BASE_URL)/v3/tone?version=2017-09-21"
 ```
 
-This request uses `tone.json`.
+This request uses `tone2.json`.
 
 ```json
 {
     "text": "Wow guys, our cluster just got accepted to SmartGeometry!"
+}
+```
+
+Run `make engagement`.
+
+```
+curl -X POST --user "$(USERNAME)":"$(PASSWORD)" \
+--header "Content-Type: application/json" \
+--data-binary @tone-chat.json \
+"$(BASE_URL)/v3/tone_chat?version=2017-09-21"
+```
+
+This request uses `tone-chat.json`.
+
+```json
+{
+  "utterances": [
+    {
+      "text": "Hello, I'm having a problem with your product.",
+      "user": "customer"
+    },
+    {
+      "text": "OK, let me know what's going on, please.",
+      "user": "agent"
+    },
+    {
+      "text": "Well, nothing is working :(",
+      "user": "customer"
+    },
+    {
+      "text": "Sorry to hear that.",
+      "user": "agent"
+    }
+  ]
 }
 ```
 
