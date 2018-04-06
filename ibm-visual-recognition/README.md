@@ -1,4 +1,4 @@
-# Watson Visual Recognition Service (IBM Cloud)
+# Visual Recognition (IBM Cloud · Watson)
 
 This should return some like the following.
 
