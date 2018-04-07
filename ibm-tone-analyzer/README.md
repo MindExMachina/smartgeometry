@@ -2,6 +2,8 @@
 
 A sample use of Watson Tone Analyzer.
 
+- [IBM Dashboard](https://console.bluemix.net/dashboard/apps)
+
 ## Requirements
 
 - Create an account on IBM Cloud.
