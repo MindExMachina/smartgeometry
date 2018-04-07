@@ -347,13 +347,13 @@
   * https://github.com/ccampbell/mousetrap 
   */
 
- Mousetrap.bind(['command+x', 'command+o'], function(e) {
+ Mousetrap.bind(['command+x', 'command+o', 'ctrl+x'], function(e) {
      console.log('clear');
      strokes = [];
      return false;
  });
 
- Mousetrap.bind('command+s', function(e) {
+ Mousetrap.bind(['command+s', 'ctrl+s'], function(e) {
      console.log('save');
      saveSVG(strokes);
      return false;

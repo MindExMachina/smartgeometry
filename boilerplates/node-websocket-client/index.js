@@ -28,22 +28,19 @@
 // Load WebSocket dependencies
 const Html5WebSocket = require('html5-websocket');
 const ReconnectingWebSocket = require('reconnecting-websocket');
+const uuid = require('uuid');
 
-// Load sketch-rnn simple predict module
-var simple_predict = require('./lib/simple_predict');
+// Configuration
 
-/**
- * Websocket server configuration.
- */
-
-const local = false;
+let verbose = true;
+const local = true;
 
 let ws_host = 'smartgeometry.herokuapp.com';
 let ws_port = '80';
 
 if (local) {
     ws_host = '127.0.0.1';
-    ws_port = '8000';
+    ws_port = '3000';
 }
 
 // ██╗    ██╗███████╗██████╗ ███████╗ ██████╗  ██████╗██╗  ██╗███████╗████████╗███████╗
@@ -75,14 +72,12 @@ rws.onerror = (err) => {
     }
 };
 
-// ██╗  ██╗ █████╗ ███╗   ██╗██████╗ ██╗     ███████╗██████╗ ███████╗
+// █╗  ██╗ █████╗ ███╗   ██╗██████╗ ██╗     ███████╗██████╗ ███████╗
 // ██║  ██║██╔══██╗████╗  ██║██╔══██╗██║     ██╔════╝██╔══██╗██╔════╝
 // ███████║███████║██╔██╗ ██║██║  ██║██║     █████╗  ██████╔╝███████╗
 // ██╔══██║██╔══██║██║╚██╗██║██║  ██║██║     ██╔══╝  ██╔══██╗╚════██║
 // ██║  ██║██║  ██║██║ ╚████║██████╔╝███████╗███████╗██║  ██║███████║
 // ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚══════╝
-
-var verbose = true;
 
 var handleMessage = function(m) {
     var method = m.method;
@@ -112,9 +107,6 @@ var handleMessage = function(m) {
             case "distribute-strokes":
                 handleDistributeStroke(m);
                 break;
-            case "sketch-rnn:get-prediction:0.0.1":
-                handleSketchRNNGetPrediction001(m);
-                break;
             default:
                 if (verbose) console.log('(No handler for ' + method + '.)');
         }
@@ -132,44 +124,3 @@ var handleDistributeStroke = function(m) {
     //     strokes.push(location);
     // }
 };
-
-var handleSketchRNNGetPrediction001 = function(m) {
-    console.log('yay! received a request for a prediction');
-    let inputStrokes = m.params.strokes;
-    console.log('------------');
-    console.log('INPUT STROKES');
-    console.log('------------');
-    console.log(inputStrokes);
-    let outputStrokes = sketchRNNGetPrediction(inputStrokes);
-    console.log('------------');
-    console.log('OUTPUT STROKES');
-    console.log('------------');
-    console.log(outputStrokes);
-
-    rws.send(
-        '{"method":"send-strokes", ' +
-        '"params": {"strokes": ' + JSON.stringify(outputStrokes) + '},' +
-        '"id": "' + uuid() + '"}');
-}
-
-var uuid = function() {
-    return 'placeholder-uuid-node-server';
-}
-
-/**
- * Get a prediction on how to continue a sketch
- * using Google's Sketch RNN.
- * 
- * @param [[dx, dy, p1, p2, p3], […]] strokes 
- */
-var sketchRNNGetPrediction = function(strokes) {
-
-    simple_predict.set_absolute_strokes(strokes)
-
-    // infer new strokes (and store in predicted_strokes)
-    simple_predict.predict();
-
-    // get predicted_strokes
-    return simple_predict.output_strokes_absolute();
-
-}
