@@ -1,6 +1,6 @@
 # Visual Recognition (IBM Cloud · Watson)
 
-This should return some like the following.
+## Table of Contents
 
 - Classify an image
 - Detect faces in an image
