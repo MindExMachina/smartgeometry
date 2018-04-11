@@ -10,6 +10,7 @@ Machine intelligence services to design robot-human-ai interactions.
 - visual recognition [http](https://github.com/nonoesp/smartgeometry/tree/master/ibm-visual-recognition) [coreml](https://github.com/nonoesp/smartgeometry/tree/master/ibm-visual-recognition/CoreMLSwift-CircleOrSquare)
 - tony analyzer [http](https://github.com/nonoesp/smartgeometry/tree/master/ibm-tone-analyzer)
 - yolo [c++](https://pjreddie.com/darknet/yolo/)
+- teachable machina [http](tree/master/teachable-machina)
 
 ## Resources
 
