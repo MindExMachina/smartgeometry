@@ -26,6 +26,10 @@ import RecordOpener from './ui/components/RecordOpener.js';
 import LaunchScreen from './ui/modules/wizard/LaunchScreen.js';
 import BrowserUtils from './ui/components/BrowserUtils';
 
+// sg
+import ReconnectingWebsocket from './sg/lib/ReconnectingWebsocket.js';
+import WsClient from './sg/WsClient.js';
+
 function init() {
 
 	// Shim for forEach for IE/Edge
@@ -46,7 +50,11 @@ function init() {
 	GLOBALS.recordSection = new Recording(document.querySelector('#recording'));
 	if (localStorage.getItem('isBackFacingCam') && localStorage.getItem('isBackFacingCam') === 'true') {
 		GLOBALS.isBackFacingCam = true;
-	}
+    }
+    
+    // sg
+    GLOBALS.ws = new WsClient();
+    GLOBALS.currentId = '';
 }
 
 window.addEventListener('load', init);

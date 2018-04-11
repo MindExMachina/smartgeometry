@@ -184,7 +184,33 @@ class LearningSection {
 			this.currentIndex = maxIndex;
 			let id = GLOBALS.classNames[this.currentIndex];
 			this.ledOn(id);
-			GLOBALS.outputSection.trigger(id);
+            GLOBALS.outputSection.trigger(id);
+            if(GLOBALS.currentId != id) {
+                GLOBALS.currentId = id;
+                GLOBALS.currentIdDuration = 0;
+            } else {
+                GLOBALS.currentIdDuration++;
+                //GLOBALS.ws.send('{"method":"send-message", "params": {"text": "duration of '+id+' is '+GLOBALS.currentIdDuration+'"}}');
+                if(GLOBALS.currentIdDuration == 10) {
+                    
+                    GLOBALS.ws.send('{"method":"send-message", "params": {"text": "This is Teachable Machine here: '+id+'"}}');
+                    
+                    let color = '#ffffff';
+                    color = GLOBALS.colors[id];
+
+                    // if(id == 'green') {
+                    //     color = '';
+                    // } else if(id == 'purple') {
+                    //     color = '';
+                    // } else if(id == 'orange') {
+                    //     color = '';
+                    // }
+
+                    GLOBALS.ws.send('{"method":"set-background-color", "params": {"color": "'+color+'"}}');
+                    
+                }
+            }
+            
 		}
 
 		for (let index = 0; index < 3; index += 1) {

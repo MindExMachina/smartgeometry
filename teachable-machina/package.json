@@ -26,7 +26,7 @@
     "style-build": "stylus -c -u nib style/main.styl -o public/style.css",
     "eslint": "eslint src",
     "stylint": "stylint style",
-    "budo": "budo src/index.js:bundle.js --port=3000 --live -v --dir=public -o",
+    "budo": "budo src/index.js:bundle.js --host=localhost --port=3000 --live -v --dir=public -o",
     "budo-https": "budo src/index.js:bundle.js --ssl --cert=server.cer --key=server.key --port=3000 --live -v --dir=public -o",
     "watch": "npm run style-build && concurrently \"npm run assets-watch\" \"npm run html-watch\" \"npm run budo\" \"npm run style-watch\"",
     "watch-https": "npm run style-build && concurrently \"npm run assets-watch\" \"npm run html-watch\" \"npm run budo-https\" \"npm run style-watch\""
