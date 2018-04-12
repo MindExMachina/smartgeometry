@@ -1,5 +1,6 @@
-# Teachable Machinea
-## About
+# Teachable Machina
+
+![Teachable Machina](assets/static/cover.jpg)
 
 Teachable Machina is an experiment that makes it easier for anyone to explore machine learning, live in the browser – no coding required — and send instructions to Machina bridge to be executed by a robot.
 
