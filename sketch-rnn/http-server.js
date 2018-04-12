@@ -95,6 +95,14 @@ app.post('/simple_predict_absolute', function(req, res) {
 
     // Get strokes from the POST request's parameters
     var strokes = req.body.strokes;
+    var model = req.body.model;
+    if (model) {
+        console.log("Requesting model " + model);
+        simple_predict.load_model(model);
+    } 
+    else {
+        console.log("No model requested");
+    }
 
     // If strokes are provided on the request,
     // set them as input strokes for simple_predict
