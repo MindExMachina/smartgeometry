@@ -26,9 +26,11 @@ class SpeechOutput {
         this.element.classList.add('output__container--speech');
 
         this.defaultMessages = [
-            'Hello',
-            'Awesome',
-            'Yes'
+            'Stop',
+            'Up',
+            'Right',
+            'Down',
+            'Left'
         ];
 
         this.classNames = GLOBALS.classNames;
@@ -259,19 +261,22 @@ class SpeechOutput {
         if (sound === 'null') {
             this.sound = ' ';
         }
-        let color = '#2baa5e';
-        switch (colorId) {
-            case 0:
-                color = '#2baa5e';
-                break;
-            case 1:
-                color = '#c95ac5';
-                break;
-            default:
-            case 2:
-                color = '#dd4d31';
-                break;
-        }
+        /* start · sg edit*/
+        // let color = '#2baa5e';
+        let color = this.colors[this.classNames[colorId]];
+        console.log('color for ' + this.classNames[colorId] + ' is ' + color);
+        // switch (colorId) {
+        //     case 0:
+        //         color = '#2baa5e';
+        //         break;
+        //     case 1:
+        //         color = '#c95ac5';
+        //         break;
+        //     default:
+        //     case 2:
+        //         color = '#dd4d31';
+        //         break;
+        // }
         if (this.canvasImage) {
             this.context.globalCompositeOperation = 'source-over';
             this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -286,6 +291,7 @@ class SpeechOutput {
             this.context.fillStyle = color;
             this.context.fillRect(0, 0, 300, 300);
         }
+        /* end · sg edit*/
     }
 
 }

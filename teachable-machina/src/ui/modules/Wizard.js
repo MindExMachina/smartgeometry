@@ -697,25 +697,19 @@ class Wizard {
             GLOBALS.camInput.start();
         }, 500);
         GLOBALS.inputSection.enable();
-        GLOBALS.inputSection.hideGif(0);
-        GLOBALS.inputSection.hideGif(1);
-        GLOBALS.inputSection.hideGif(2);
-        GLOBALS.inputSection.hideGif(3);
-        // GLOBALS.inputSection.hideGif(4);
+        for (var i = 0; i < 4; i++) {
+            GLOBALS.inputSection.hideGif(i);
+        }
         GLOBALS.inputSection.undim();
         GLOBALS.learningSection.dehighlight();
         /* start · sg edit*/
-        GLOBALS.learningSection.dehighlightClass(0);
-        GLOBALS.learningSection.dehighlightClass(1);
-        GLOBALS.learningSection.dehighlightClass(2);
-        GLOBALS.learningSection.dehighlightClass(3);
-        GLOBALS.learningSection.dehighlightClass(4);
+        for (var i = 0; i < GLOBALS.numClasses; i++) {
+            GLOBALS.learningSection.dehighlightClass(i);
+        }
         GLOBALS.learningSection.enable();
-        GLOBALS.learningSection.enableClass(0);
-        GLOBALS.learningSection.enableClass(1);
-        GLOBALS.learningSection.enableClass(2);
-        GLOBALS.learningSection.enableClass(3);
-        GLOBALS.learningSection.enableClass(4);
+        for (var i = 0; i < GLOBALS.numClasses; i++) {
+            GLOBALS.learningSection.enableClass(i);
+        }
         /* end · sg edit*/
         GLOBALS.learningSection.undim();
         GLOBALS.outputSection.dehighlight();

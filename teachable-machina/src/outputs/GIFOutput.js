@@ -55,6 +55,16 @@ class GIFOutput {
         this.defaultGifs.push({
             still: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/giphy-downsized_s.gif',
             gif: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/200w.gif'
+        });
+
+        this.defaultGifs.push({
+            still: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/giphy-downsized_s.gif',
+            gif: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/200w.gif'
+        });
+
+        this.defaultGifs.push({
+            still: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/giphy-downsized_s.gif',
+            gif: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/200w.gif'
         }); /* end · sg edit*/
 
         this.edit = document.createElement('div');

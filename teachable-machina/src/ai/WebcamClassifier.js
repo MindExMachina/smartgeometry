@@ -361,13 +361,10 @@ class WebcamClassifier {
                 const indices = topK.indices.getValues();
 
                 /* start · sg edit*/
-                const classTopKMap = [
-                    0,
-                    0,
-                    0,
-                    0,
-                    0
-                ];
+                const classTopKMap = [];
+                for (var i = 0; i < GLOBALS.numClasses; i++) {
+                    classTopKMap.push(0);
+                }
                 /* end · sg edit*/
                 for (let index = 0; index < indices.length; index += 1) {
                     classTopKMap[this.getClassFromIndex(indices[index])] += 1;

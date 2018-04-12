@@ -19,35 +19,45 @@ let GLOBALS = {
         'purple',
         'orange',
         'red',
-        'blue'
+        'blue',
+        // 'yellow',
+        // 'brown'
     ],
     colors: {
         'green': '#2baa5e',
         'purple': '#c95ac5',
         'orange': '#f28621',
         'red': '#e8453c',
-        'blue': '#4286f4'
+        'blue': '#4286f4',
+        // 'yellow': '#4286f4',
+        // 'brown': '#4286f4'
     },
     rgbaColors: {
         'green': 'rgba(43, 170, 94, 0.25)',
         'purple': 'rgba(201, 90, 197, 0.25)',
         'orange': 'rgba(221, 77, 49, 0.25)',
         'red': 'rgba(232, 69, 60, 0.25)',
-        'blue': 'rgba(66, 134, 244, 1)'
+        'blue': 'rgba(66, 134, 244, 1)',
+        // 'yellow': 'rgba(66, 134, 244, 1)',
+        // 'brown': 'rgba(66, 134, 244, 1)'
     },
     classesTrained: {
         'green': false,
         'purple': false,
         'orange': false,
         'red': false,
-        'blue': false
+        'blue': false,
+        // 'yellow': false,
+        // 'brown': false
     },
     classImages: {
         'green': 'green.png',
         'purple': 'purple.png',
         'orange': 'orange.png',
         'red': 'red.png',
-        'blue': 'blue.png'
+        'blue': 'blue.png',
+        // 'yellow': 'blue.png',
+        // 'brown': 'blue.png'
     },
     /* end · sg edit*/
     button: {
