@@ -1,10 +1,11 @@
-# Teachable Machine 
+# Teachable Machinea
 ## About
-Teachable Machine is an experiment that makes it easier for anyone to explore machine learning, live in the browser – no coding required. Learn more about the experiment and try it yourself on [g.co/teachablemachine](https://g.co/teachablemachine). 
 
-The experiment is built using the [deeplearn.js](https://github.com/PAIR-code/deeplearnjs) library.
+Teachable Machina is an experiment that makes it easier for anyone to explore machine learning, live in the browser – no coding required — and send instructions to Machina bridge to be executed by a robot.
 
-We have also released a boilerplate version of this project that can be used as a starting point for your own projects: [googlecreativelab/teachable-machine-boilerplate](https://github.com/googlecreativelab/teachable-machine-boilerplate)
+Learn more about the original experiment and try it yourself on [g.co/teachablemachine](https://g.co/teachablemachine). The experiment is built using the [deeplearn.js](https://github.com/PAIR-code/deeplearnjs) library.
+
+There is also released a boilerplate version of this project that can be used as a starting point for your own projects: [googlecreativelab/teachable-machine-boilerplate](https://github.com/googlecreativelab/teachable-machine-boilerplate)
 
 ## Development
 #### Install dependencies by running (similar to `npm install`)

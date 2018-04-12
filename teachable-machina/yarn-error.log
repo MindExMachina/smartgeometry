@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/node/9.11.1/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js run watch
+  /usr/local/Cellar/node/9.11.1/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js build
 
 PATH: 
   /usr/local/sbin:/Users/nono/Dropbox/1_Projects/code/go/bin:/Users/nono/anaconda2/bin:/usr/local/Cellar/php@7.0/7.0.29/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/usr/local/go/bin:/usr/local/MacGPG2/bin:/opt/X11/bin:/Users/nono/.npm-packages/bin
@@ -4024,7 +4024,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c npm run style-build && concurrently "npm run assets-watch" "npm run html-watch" "npm run budo" "npm run style-watch"
+  Arguments: -c npm run html-copy && npm run style-build && npm run assets-copy && npm run browserify
   Directory: /Users/nono/Dropbox/1_Projects/smartgeometry/repo/teachable-machina
   Output:
   
