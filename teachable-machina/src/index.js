@@ -54,6 +54,8 @@ function init() {
     }
 
     /* start · sg edit*/
+    GLOBALS.wsHost = 'smartgeometry.herokuapp.com';
+    GLOBALS.wsPort = '80';
     GLOBALS.ws = new WsClient();
     GLOBALS.ws.verbose = false;
     GLOBALS.currentId = '';

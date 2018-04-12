@@ -205,7 +205,7 @@ class LearningSection {
 
                     // Call the handler (this actions are defined in src/index.js > GLOBAL.classHandlers)
 
-                    handler(id);
+                    handler(id); // id would be "green" for example
 
                 }
             }

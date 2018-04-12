@@ -30,8 +30,8 @@ class WsClient {
     constructor() {
 
         this.verbose = true;
-        this.host = 'smartgeometry.herokuapp.com';
-        this.port = '80';
+        this.host = GLOBALS.wsHost;
+        this.port = GLOBALS.wsPort;
 
         this.setup();
 
