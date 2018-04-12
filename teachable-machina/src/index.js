@@ -55,6 +55,7 @@ function init() {
 
     /* start · sg edit*/
     GLOBALS.ws = new WsClient();
+    GLOBALS.ws.verbose = false;
     GLOBALS.currentId = '';
 
     GLOBALS.classHandlers = {

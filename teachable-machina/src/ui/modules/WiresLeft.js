@@ -23,15 +23,21 @@ class WiresLeft {
         this.size();
         this.element.appendChild(this.canvas);
         this.wireGeneral = this.element.querySelector('.st0');
+
+        /* start · sg edit*/
         this.wireGreen = this.element.querySelector('.wire-green');
         this.wirePurple = this.element.querySelector('.wire-purple');
         this.wireOrange = this.element.querySelector('.wire-orange');
+        this.wireRed = this.element.querySelector('.wire-red');
+        this.wireBlue = this.element.querySelector('.wire-blue');
+        /* end · sg edit*/
+
         this.context = this.canvas.getContext('2d');
         this.vertical = true;
         window.addEventListener('resize', () => {
             if (window.innerWidth <= 900) {
                 this.canvas.style.display = 'none';
-            }else {
+            } else {
                 this.canvas.style.display = 'block';
             }
         });
@@ -44,7 +50,9 @@ class WiresLeft {
         this.context.clearRect(0, 0, this.width, this.height);
         this.context.lineWidth = 3;
 
-        for (let index = 0; index < 3; index += 1) {
+        /* start · sg edit*/
+        for (let index = 0; index < GLOBALS.numClasses; index += 1) {
+            /* end · sg edit*/
 
             let startY = this.startY + (this.startSpace * index);
             let endY = this.endY + (this.endSpace * index);
@@ -70,7 +78,7 @@ class WiresLeft {
             };
 
             this.context.strokeStyle = '#cfd1d2';
-            
+
             if (this.animator[index].highlight) {
                 this.context.strokeStyle = this.animator[index].color;
             }
@@ -84,7 +92,7 @@ class WiresLeft {
 
         if (this.renderOnce) {
             this.renderOnce = false;
-        }else {
+        } else {
             this.timer = requestAnimationFrame(this.render.bind(this));
         }
 
@@ -106,18 +114,26 @@ class WiresLeft {
         this.currentAnimator.highlight = true;
         this.start();
 
+        /* start · sg edit*/
         switch (index) {
             case 0:
-            this.wireGreen.classList.add('animate');
-            break;
+                this.wireGreen.classList.add('animate');
+                break;
             case 1:
-            this.wireOrange.classList.add('animate');
-            break;
+                this.wireOrange.classList.add('animate');
+                break;
             case 2:
-            this.wirePurple.classList.add('animate');
-            break;
+                this.wirePurple.classList.add('animate');
+                break;
+            case 3:
+                this.wireRed.classList.add('animate');
+                break;
+            case 4:
+                this.wireBlue.classList.add('animate');
+                break;
             default:
         }
+        /* end · sg edit*/
     }
 
     dehighlight(index) {
@@ -128,9 +144,13 @@ class WiresLeft {
             this.renderOnce = true;
             this.render();
         }
+        /* start · sg edit*/
         this.wireGreen.classList.remove('animate');
         this.wirePurple.classList.remove('animate');
         this.wireOrange.classList.remove('animate');
+        this.wireRed.classList.remove('animate');
+        this.wireBlue.classList.remove('animate');
+        /* end · sg edit*/
     }
 
     start() {
@@ -175,7 +195,9 @@ class WiresLeft {
         this.endY = 80;
 
         this.animator = {};
-        for (let index = 0; index < 3; index += 1) {
+        /* start · sg edit*/
+        for (let index = 0; index < GLOBALS.numClasses; index += 1) {
+            /* end · sg edit*/
             let id = GLOBALS.classNames[index];
             this.animator[index] = {
                 highlight: false,

@@ -213,7 +213,9 @@ class LearningSection {
 
         }
 
-        for (let index = 0; index < 3; index += 1) {
+        /* start · sg edit*/
+        for (let index = 0; index < GLOBALS.numClasses; index += 1) {
+            /* end · sg edit*/
             this.learningClasses[index].setConfidence(confidences[index] * 100);
             if (index === maxIndex) {
                 this.learningClasses[index].highlightConfidence();

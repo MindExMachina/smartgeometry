@@ -13,48 +13,62 @@
 // limitations under the License.
 let AudioContext = window.AudioContext || window.webkitAudioContext;
 let GLOBALS = {
-	button: {
-		padding: 0,
-		frontHeight: 40,
-		states: {
-			normal: {
-				x: 8,
-				y: 8
-			},
-			pressed: {
-				x: 4,
-				y: 4
-			}
-		}
-	},
-	classNames: [
-	'green',
-	'purple',
-	'orange',
-	'red'
-	],
-	colors: {
-		'green': '#2baa5e',
-		'purple': '#c95ac5',
-		'orange': '#dd4d31',
-		'red': '#e8453c'
-	},
-	rgbaColors: {
-		'green': 'rgba(43, 170, 94, 0.25)',
-		'purple': 'rgba(201, 90, 197, 0.25)',
-		'orange': 'rgba(221, 77, 49, 0.25)',
-		'red': 'rgba(232, 69, 60, 0.25)'
-	},
-	classId: null,
-	predicting: false,
-	micThreshold: 25,
-	classesTrained: {
-		'green': false,
-		'purple': false,
-		'orange': false
-	},
-	numClasses: 3,
-	audioContext: new AudioContext(),
+    numClasses: 5,
+    classNames: [
+        'green',
+        'purple',
+        'orange',
+        'red',
+        'blue'
+    ],
+    colors: {
+        'green': '#2baa5e',
+        'purple': '#c95ac5',
+        'orange': '#f28621',
+        'red': '#e8453c',
+        'blue': '#4286f4'
+    },
+    rgbaColors: {
+        'green': 'rgba(43, 170, 94, 0.25)',
+        'purple': 'rgba(201, 90, 197, 0.25)',
+        'orange': 'rgba(221, 77, 49, 0.25)',
+        'red': 'rgba(232, 69, 60, 0.25)',
+        'blue': 'rgba(66, 134, 244, 1)'
+    },
+    classesTrained: {
+        'green': false,
+        'purple': false,
+        'orange': false,
+        'red': false,
+        'blue': false
+    },
+    classImages: {
+        'green': 'green.png',
+        'purple': 'purple.png',
+        'orange': 'orange.png',
+        'red': 'red.png',
+        'blue': 'blue.png'
+    },
+    /* end · sg edit*/
+    button: {
+        /* start · sg edit*/
+        padding: 0,
+        frontHeight: 40,
+        states: {
+            normal: {
+                x: 8,
+                y: 8
+            },
+            pressed: {
+                x: 4,
+                y: 4
+            }
+        }
+    },
+    classId: null,
+    predicting: false,
+    micThreshold: 25,
+    audioContext: new AudioContext(),
     isBackFacingCam: false
 };
 

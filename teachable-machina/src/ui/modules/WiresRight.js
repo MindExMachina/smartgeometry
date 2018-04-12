@@ -20,9 +20,13 @@ class WiresRight {
         this.bulbVert = true;
         this.bulbSmall = false;
 
+        /* start · sg edit*/
         this.bulbGreen = this.element.querySelector('.wire--right-bulb-green-glow');
         this.bulbPurple = this.element.querySelector('.wire--right-bulb-purple-glow');
         this.bulbOrange = this.element.querySelector('.wire--right-bulb-orange-glow');
+        this.bulbRed = this.element.querySelector('.wire--right-bulb-red-glow');
+        this.bulbBlue = this.element.querySelector('.wire--right-bulb-blue-glow');
+        /* end · sg edit*/
 
         this.element.appendChild(this.canvas);
         this.context = this.canvas.getContext('2d');
@@ -30,7 +34,9 @@ class WiresRight {
         this.offsetY = 0;
         this.animator = {};
 
-        for (let index = 0; index < 3; index += 1) {
+        /* start · sg edit*/
+        for (let index = 0; index < GLOBALS.numClasses; index += 1) {
+            /* end · sg edit*/
 
             let bulbElement = document.createElement('div');
 
@@ -49,7 +55,7 @@ class WiresRight {
         window.addEventListener('resize', () => {
             if (window.innerWidth <= 900) {
                 this.canvas.style.display = 'none';
-            }else {
+            } else {
                 this.canvas.style.display = 'block';
             }
         });
@@ -72,7 +78,7 @@ class WiresRight {
 
             this.renderOnce = true;
             this.render();
-        }else {
+        } else {
             this.altOffset = 300;
             this.size();
             this.renderAlt();
@@ -83,7 +89,9 @@ class WiresRight {
         this.context.clearRect(0, 0, this.width, this.height);
         this.context.lineWidth = 3;
 
-        for (let index = 0; index < 3; index += 1) {
+        /* start · sg edit*/
+        for (let index = 0; index < GLOBALS.numClasses; index += 1) {
+            /* end · sg edit*/
             let startY = this.startY + (this.startSpace * index);
 
             let start = {
@@ -114,10 +122,10 @@ class WiresRight {
 
         if (this.renderOnce) {
             this.renderOnce = false;
-        }else {
+        } else {
             if (this.current < this.loops) {
                 this.current += 1;
-            }else {
+            } else {
                 this.dehighlight();
             }
             this.running = true;
@@ -153,10 +161,10 @@ class WiresRight {
 
         if (this.renderOnce) {
             this.renderOnce = false;
-        }else {
+        } else {
             if (this.current < this.loops) {
                 this.current += 1;
-            }else {
+            } else {
                 this.dehighlight();
             }
             this.timer = requestAnimationFrame(this.renderAlt.bind(this));
@@ -173,24 +181,36 @@ class WiresRight {
         //     this.current = 0;
         //     this.start();
         // }
+        /* start · sg edit*/
         switch (index) {
             case 0:
-            this.bulbGreen.classList.add('bulb--selected');
-            break;
+                this.bulbGreen.classList.add('bulb--selected');
+                break;
             case 1:
-            this.bulbOrange.classList.add('bulb--selected');
-            break;
+                this.bulbOrange.classList.add('bulb--selected');
+                break;
             case 2:
-            this.bulbPurple.classList.add('bulb--selected');
-            break;
+                this.bulbPurple.classList.add('bulb--selected');
+                break;
+            case 3:
+                this.bulbRed.classList.add('bulb--selected');
+                break;
+            case 4:
+                this.bulbBlue.classList.add('bulb--selected');
+                break;
             default:
         }
+        /* end · sg edit*/
     }
 
     dehighlight() {
+        /* start · sg edit*/
         this.bulbGreen.classList.remove('bulb--selected');
         this.bulbPurple.classList.remove('bulb--selected');
         this.bulbOrange.classList.remove('bulb--selected');
+        this.bulbRed.classList.remove('bulb--selected');
+        this.bulbBlue.classList.remove('bulb--selected');
+        /* end · sg edit*/
     }
 
     start() {

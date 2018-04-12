@@ -137,6 +137,14 @@
 	color: $color__class-orange--primary
 }
 
+.learning__class--red {
+	color: $color__class-red--primary
+}
+
+.learning__class--blue {
+	color: $color__class-blue--primary
+}
+
 .learning__class:last-of-type {
 	margin-bottom: 0
 }
@@ -252,6 +260,14 @@
 
 .machine__value--color-orange {
 	background: $color__class-orange--primary
+}
+
+.machine__value--color-red {
+	background: $color__class-red--primary
+}
+
+.machine__value--color-blue {
+	background: $color__class-blue--primary
 }
 
 
@@ -454,6 +470,7 @@
 	background-position-x: -42px
 
 }
+
 
 .wires__bulb--selected {
 	background-position-y: -34px
@@ -666,7 +683,9 @@
 
 	.wire-base-green,
 	.wire-base-purple,
-	.wire-base-orange {
+	.wire-base-orange,
+	.wire-base-red,
+	.wire-base-blue {
 		stroke: #CED1D2
 		stroke-width: 3px
 	}
@@ -675,7 +694,9 @@
 		
 	.wire-green,
 	.wire-purple,
-	.wire-orange {
+	.wire-orange,
+	.wire-red,
+	.wire-blue {
 
 		&.animate {
 			stroke: $color__text--dark
@@ -708,6 +729,22 @@
 
 		&.bulb--selected {
 			stroke: $color__class-orange--primary
+			filter: url(#blur-filter)
+		}
+	}
+
+	.wire--right-bulb-red-glow {
+
+		&.bulb--selected {
+			stroke: $color__class-red--primary
+			filter: url(#blur-filter)
+		}
+	}
+
+	.wire--right-bulb-blue-glow {
+
+		&.bulb--selected {
+			stroke: $color__class-blue--primary
 			filter: url(#blur-filter)
 		}
 	}

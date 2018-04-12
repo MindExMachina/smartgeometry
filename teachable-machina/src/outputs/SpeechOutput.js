@@ -26,9 +26,9 @@ class SpeechOutput {
         this.element.classList.add('output__container--speech');
 
         this.defaultMessages = [
-        'Hello',
-        'Awesome',
-        'Yes'
+            'Hello',
+            'Awesome',
+            'Yes'
         ];
 
         this.classNames = GLOBALS.classNames;
@@ -50,6 +50,8 @@ class SpeechOutput {
             inputClass.message = message;
             inputClass.classList.add('output__speech-class');
             inputClass.classList.add(`output__speech-class--${id}`);
+
+            console.log(inputClass);
 
             let speakerIcon = document.createElement('div');
             speakerIcon.classList.add('output__speech-speaker');
@@ -204,7 +206,7 @@ class SpeechOutput {
                     this.currentIcon.classList.add('output__speech-speaker--active');
                     this.textToSpeech.say(sound, this.ttsEnded.bind(this));
                     this.currentTTS = true;
-                }else {
+                } else {
                     this.canTrigger = true;
                 }
                 if (this.canvas) {

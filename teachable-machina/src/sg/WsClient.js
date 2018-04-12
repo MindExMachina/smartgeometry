@@ -35,7 +35,7 @@ class WsClient {
 
         this.setup();
 
-        if(this.verbose) console.log('WsClient was created.');
+        if (this.verbose) console.log('WsClient was created.');
     }
 
     setup() {
@@ -51,7 +51,7 @@ class WsClient {
     //  ╚══╝╚══╝ ╚══════╝╚═════╝ ╚══════╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝
 
     setupWebsocket() {
-        
+
         this.ws = new ReconnectingWebsocket('ws://' + this.host + ':' + this.port + '/ws', undefined, {});
         this.ws.timeout = 1000;
 
@@ -63,16 +63,16 @@ class WsClient {
         this.ws.addEventListener('message', (e) => {
             this.handleMessage(JSON.parse(e.data));
         });
-        
+
         this.ws.addEventListener('close', () => {
             console.log('connection closed');
         });
-        
+
         this.ws.onerror = (err) => {
             if (err.code === 'EHOSTDOWN') {
                 console.log('server down');
             }
-        };        
+        };
     }
 
     // ██╗  ██╗ █████╗ ███╗   ██╗██████╗ ██╗     ███████╗██████╗ ███████╗
@@ -89,35 +89,35 @@ class WsClient {
                 console.log('Your id is ' + m.params.id);
             },
             "client-list": function(m) {
-                console.log('Client list');
-                console.log(m.params.clients);
+                console.log('Received client list.');
+                // console.log(m.params.clients);
             }
         }
 
         this.handleMessage = function(m) {
-            
-            var method = m.method;
-        
-            if (method) {
-        
-                if (this.verbose) console.log('★ Received ' + method + '.');
 
-                if(this.handlers[method]) {
+            var method = m.method;
+
+            if (method) {
+
+                //if (this.verbose) console.log('★ Received ' + method + '.');
+
+                if (this.handlers[method]) {
                     var handler = this.handlers[method];
                     handler(m);
                 } else {
-                    if (this.verbose) console.log('(No handler for ' + method + '.)');
+                    //if (this.verbose) console.log('(No handler for ' + method + '.)');
                 }
 
             }
         }
     }
 
-   // Helpers
+    // Helpers
 
-   send(message) {
-    this.ws.send(message);
-   }
+    send(message) {
+        this.ws.send(message);
+    }
 
 }
 
