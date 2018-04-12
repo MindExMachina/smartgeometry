@@ -26,35 +26,72 @@ import RecordOpener from './ui/components/RecordOpener.js';
 import LaunchScreen from './ui/modules/wizard/LaunchScreen.js';
 import BrowserUtils from './ui/components/BrowserUtils';
 
-// sg
+/* start · sg edit*/
 import ReconnectingWebsocket from './sg/lib/ReconnectingWebsocket.js';
 import WsClient from './sg/WsClient.js';
+/* end · sg edit*/
 
 function init() {
 
-	// Shim for forEach for IE/Edge
+    // Shim for forEach for IE/Edge
     if (typeof NodeList.prototype.forEach !== 'function') {
         NodeList.prototype.forEach = Array.prototype.forEach;
-	}
+    }
     GLOBALS.browserUtils = new BrowserUtils();
     GLOBALS.launchScreen = new LaunchScreen();
 
     GLOBALS.learningSection = new LearningSection(document.querySelector('#learning-section'));
-	GLOBALS.inputSection = new InputSection(document.querySelector('#input-section'));
-	GLOBALS.outputSection = new OutputSection(document.querySelector('#output-section'));
+    GLOBALS.inputSection = new InputSection(document.querySelector('#input-section'));
+    GLOBALS.outputSection = new OutputSection(document.querySelector('#output-section'));
     GLOBALS.recordOpener = new RecordOpener(document.querySelector('#record-open-section'));
 
-	GLOBALS.inputSection.ready();
-	GLOBALS.learningSection.ready();
-	GLOBALS.wizard = new Wizard();
-	GLOBALS.recordSection = new Recording(document.querySelector('#recording'));
-	if (localStorage.getItem('isBackFacingCam') && localStorage.getItem('isBackFacingCam') === 'true') {
-		GLOBALS.isBackFacingCam = true;
+    GLOBALS.inputSection.ready();
+    GLOBALS.learningSection.ready();
+    GLOBALS.wizard = new Wizard();
+    GLOBALS.recordSection = new Recording(document.querySelector('#recording'));
+    if (localStorage.getItem('isBackFacingCam') && localStorage.getItem('isBackFacingCam') === 'true') {
+        GLOBALS.isBackFacingCam = true;
     }
-    
-    // sg
+
+    /* start · sg edit*/
     GLOBALS.ws = new WsClient();
     GLOBALS.currentId = '';
+
+    GLOBALS.classHandlers = {
+
+            // What happens when the classified id is "green"?
+
+            "green": function(id) {
+                console.log('This executes when ' + id + ' activates.');
+                console.log('Some phrase green.');
+            },
+
+            // or "purple"
+
+            "purple": function(id) {
+                console.log('This executes when ' + id + ' activates.');
+                console.log('Morado.');
+            },
+
+            // or "orange"
+
+            "orange": function(id) {
+                console.log('This executes when ' + id + ' activates.');
+                console.log('Naranja.');
+            },
+
+            // If no handler is provided for a class id, this gets executed.
+
+            "default": function(id) {
+
+                console.log('Default class handler. No handler provided for class ' + id + '.');
+
+                GLOBALS.ws.send('{"method":"send-message", "params": {"text": "This is Teachable Machine here: ' + id + '"}}');
+                GLOBALS.ws.send('{"method":"set-background-color", "params": {"color": "' + GLOBALS.colors[id] + '"}}');
+
+            }
+        }
+        /* end · sg edit*/
 }
 
 window.addEventListener('load', init);
