@@ -8,3 +8,4 @@ server.key
 server.cer
 *.pyc
 lib/*
+yarn-error.log
