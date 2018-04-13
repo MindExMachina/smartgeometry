@@ -42,7 +42,7 @@ class WiresRight {
 
             bulbElement.classList.add('wires__bulb');
             bulbElement.classList.add('wires__bulb-' + GLOBALS.classNames[index]);
-            console.log(bulbElement.classList);
+
             this.size();
 
             this.element.appendChild(bulbElement);
@@ -88,7 +88,7 @@ class WiresRight {
 
     render(once) {
         this.context.clearRect(0, 0, this.width, this.height);
-        this.context.lineWidth = 3;
+        this.context.lineWidth = 1;
 
         /* start · sg edit*/
         for (let index = 0; index < GLOBALS.numClasses; index += 1) {
@@ -231,16 +231,16 @@ class WiresRight {
 
         this.width = this.element.offsetWidth;
         let bulbs = Array.from(document.getElementsByClassName('wires__bulb'));
-        this.startSpace = (this.height - 80) / 3;
+        this.startSpace = (this.height - 80) / GLOBALS.numClasses;
         // console.log(this.startSpace);
         this.startSpace = 130;
-        this.endSpace = (this.height + 45) / 5;
+        this.endSpace = (this.height - 253) / GLOBALS.numClasses;
         this.canvas.width = 70;
-        this.canvas.height = 770; //this.height;
+        this.canvas.height = this.height;
 
         // this element rotated in css and using height as width
         // if (window.innerWidth >= BREAKPOINT_DESKTOP) {
-        this.height = 450;
+        this.height = 750;
 
         // remove offset on desktop
         this.element.setAttribute('style', '');
