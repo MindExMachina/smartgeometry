@@ -57,7 +57,7 @@ class WsClient {
         this.ws.timeout = 1000;
 
         this.ws.addEventListener('open', () => {
-            // console.log('send-strokes');
+            console.log('Socket connection stablished');
             // this.ws.send('{"method":"send-strokes", "params": {"strokes": [[20,40,0,1,0],[25,40,1,0,0],[100,150,1,0,0]]}}');
         });
 

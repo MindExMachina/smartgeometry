@@ -58,11 +58,13 @@ function init() {
     // Moved to config.js
     // GLOBALS.wsHost = 'smartgeometry.herokuapp.com';
     // GLOBALS.wsPort = '80';
-    
     GLOBALS.ws = new WsClient();
     GLOBALS.ws.verbose = false;
     GLOBALS.currentId = '';
 
+    let arm = new Robot(GLOBALS.ws);
+
+    // JL: should classHandlers be moved to config.js as well? Just keep enything that can be edited in the same place... 
     GLOBALS.classHandlers = {
 
             // What happens when the classified id is "green"?
@@ -70,6 +72,7 @@ function init() {
             "green": function(id) {
                 console.log('This executes when ' + id + ' activates.');
                 console.log('Some phrase green.');
+                arm.Message("green!");
             },
 
             // or "purple"
@@ -77,6 +80,7 @@ function init() {
             "purple": function(id) {
                 console.log('This executes when ' + id + ' activates.');
                 console.log('Morado.');
+                arm.Message("morado!");
             },
 
             // or "orange"
@@ -84,6 +88,7 @@ function init() {
             "orange": function(id) {
                 console.log('This executes when ' + id + ' activates.');
                 console.log('Naranja.');
+                arm.Message("naranja!");
             },
 
             // If no handler is provided for a class id, this gets executed.
@@ -92,8 +97,8 @@ function init() {
 
                 console.log('Default class handler. No handler provided for class ' + id + '.');
 
-                GLOBALS.ws.send('{"method":"send-message", "params": {"text": "This is Teachable Machine here: ' + id + '"}}');
-                GLOBALS.ws.send('{"method":"set-background-color", "params": {"color": "' + GLOBALS.colors[id] + '"}}');
+                // GLOBALS.ws.send('{"method":"send-message", "params": {"text": "This is Teachable Machine here: ' + id + '"}}');
+                // GLOBALS.ws.send('{"method":"set-background-color", "params": {"color": "' + GLOBALS.colors[id] + '"}}');
 
             }
         }
