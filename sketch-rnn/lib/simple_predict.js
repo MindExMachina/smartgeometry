@@ -49,8 +49,9 @@ module.exports.load_sketch_rnn = function() {
 }
 
 module.exports.load_model = function(model_name) {
+    console.log("Loading " + model_name);
     let model = require('./models/' + model_name + '.gen.js');
-    model_raw_data = JSON.stringify(bird_model);
+    model_raw_data = JSON.stringify(model);
 }
 
 module.exports.output_strokes = function() {
