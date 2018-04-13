@@ -14,6 +14,7 @@
 
 import TweenMax from 'gsap';
 
+import Robot from './sg/machina.js';
 import GLOBALS from './config.js';
 import Button from './ui/components/Button.js';
 import IntroSection from './ui/modules/IntroSection.js';
@@ -54,8 +55,10 @@ function init() {
     }
 
     /* start · sg edit*/
-    GLOBALS.wsHost = 'smartgeometry.herokuapp.com';
-    GLOBALS.wsPort = '80';
+    // Moved to config.js
+    // GLOBALS.wsHost = 'smartgeometry.herokuapp.com';
+    // GLOBALS.wsPort = '80';
+    
     GLOBALS.ws = new WsClient();
     GLOBALS.ws.verbose = false;
     GLOBALS.currentId = '';

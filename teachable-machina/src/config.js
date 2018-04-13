@@ -13,6 +13,11 @@
 // limitations under the License.
 let AudioContext = window.AudioContext || window.webkitAudioContext;
 let GLOBALS = {
+    // WS config
+    wsHost: '127.0.0.1',
+    wsPort: '6999',
+    wsPath: 'Bridge',
+
     numClasses: 5,
     classNames: [
         'green',
@@ -80,6 +85,7 @@ let GLOBALS = {
     micThreshold: 25,
     audioContext: new AudioContext(),
     isBackFacingCam: false
+
 };
 
 export default GLOBALS;

@@ -32,6 +32,7 @@ class WsClient {
         this.verbose = true;
         this.host = GLOBALS.wsHost;
         this.port = GLOBALS.wsPort;
+        this.path = GLOBALS.wsPath;
 
         this.setup();
 
@@ -52,12 +53,12 @@ class WsClient {
 
     setupWebsocket() {
 
-        this.ws = new ReconnectingWebsocket('ws://' + this.host + ':' + this.port + '/ws', undefined, {});
+        this.ws = new ReconnectingWebsocket('ws://' + this.host + ':' + this.port + '/' + this.path, undefined, {});
         this.ws.timeout = 1000;
 
         this.ws.addEventListener('open', () => {
             // console.log('send-strokes');
-            this.ws.send('{"method":"send-strokes", "params": {"strokes": [[20,40,0,1,0],[25,40,1,0,0],[100,150,1,0,0]]}}');
+            // this.ws.send('{"method":"send-strokes", "params": {"strokes": [[20,40,0,1,0],[25,40,1,0,0],[100,150,1,0,0]]}}');
         });
 
         this.ws.addEventListener('message', (e) => {
