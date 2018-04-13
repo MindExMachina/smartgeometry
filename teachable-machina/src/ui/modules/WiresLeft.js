@@ -177,7 +177,7 @@ class WiresLeft {
 
         let classesHeight = lastLearningClass.offsetTop - firstLearningClass.offsetTop;
 
-        this.height = 440;
+        this.height = 700;
 
         // remove offset on desktop
         this.element.setAttribute('style', '');
