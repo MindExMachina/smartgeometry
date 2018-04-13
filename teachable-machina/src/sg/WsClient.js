@@ -34,6 +34,10 @@ class WsClient {
         this.port = GLOBALS.wsPort;
         this.path = GLOBALS.wsPath;
 
+        this.connected = false;
+        this.bufferMessages = true;
+        this.msgBuffer = [];
+
         this.setup();
 
         if (this.verbose) console.log('WsClient was created.');
@@ -57,12 +61,24 @@ class WsClient {
         this.ws.timeout = 1000;
 
         this.ws.addEventListener('open', () => {
-            console.log('Socket connection stablished');
+            console.log('Socket connection established');
             // this.ws.send('{"method":"send-strokes", "params": {"strokes": [[20,40,0,1,0],[25,40,1,0,0],[100,150,1,0,0]]}}');
+            if (this.msgBuffer.length > 0) {
+                console.log('Streaming buffer:');
+                for (let i = 0; i < this.msgBuffer.length; i++) {
+                    console.log(this.msgBuffer[i]);
+                    this.send(this.msgBuffer[i]);
+                }
+                this.msgBuffer = [];
+            }
         });
 
         this.ws.addEventListener('message', (e) => {
-            this.handleMessage(JSON.parse(e.data));
+            // this.handleMessage(JSON.parse(e.data));
+            console.log("Received: ");
+            console.log(e);
+            // console.log(JSON.parse(e.data));
+            GLOBALS.robot.onMessage(e.data);
         });
 
         this.ws.addEventListener('close', () => {
@@ -117,7 +133,15 @@ class WsClient {
     // Helpers
 
     send(message) {
-        this.ws.send(message);
+        try {
+            this.ws.send(message);
+        }
+        catch (ex) {
+            console.log(ex);
+            if (this.bufferMessages) {
+                this.msgBuffer.push(message);
+            }
+        }
     }
 
 }
