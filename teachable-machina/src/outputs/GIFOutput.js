@@ -31,41 +31,31 @@ class GIFOutput {
             this.gifCanvas = new GifCanvas();
         }
 
-        this.defaultGifs.push({
-            still: 'https://media1.giphy.com/media/vFKqnCdLPNOKc/giphy-downsized_s.gif',
-            gif: 'https://media1.giphy.com/media/vFKqnCdLPNOKc/200w.gif'
-        });
-
-        this.defaultGifs.push({
-            still: 'https://media3.giphy.com/media/14ivBLRRRmyQw0/giphy-downsized_s.gif',
-            gif: 'https://media3.giphy.com/media/14ivBLRRRmyQw0/200w.gif'
-        });
-
-        this.defaultGifs.push({
-            still: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/giphy-downsized_s.gif',
-            gif: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/200w.gif'
-        });
-
         /* start · sg edit*/
-        this.defaultGifs.push({
-            still: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/giphy-downsized_s.gif',
-            gif: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/200w.gif'
+        let that = this;
+        GLOBALS.classNames.forEach(function(className, index) {
+            that.defaultGifs.push({
+                still: GLOBALS.classImages[className],
+                gif: GLOBALS.classImages[className]
+            });
         });
 
-        this.defaultGifs.push({
-            still: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/giphy-downsized_s.gif',
-            gif: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/200w.gif'
-        });
+        // this.defaultGifs.push({
+        //     still: 'https://media1.giphy.com/media/vFKqnCdLPNOKc/giphy-downsized_s.gif',
+        //     gif: 'https://media1.giphy.com/media/vFKqnCdLPNOKc/200w.gif'
+        // });
 
-        this.defaultGifs.push({
-            still: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/giphy-downsized_s.gif',
-            gif: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/200w.gif'
-        });
+        // this.defaultGifs.push({
+        //     still: 'https://media3.giphy.com/media/14ivBLRRRmyQw0/giphy-downsized_s.gif',
+        //     gif: 'https://media3.giphy.com/media/14ivBLRRRmyQw0/200w.gif'
+        // });
 
-        this.defaultGifs.push({
-            still: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/giphy-downsized_s.gif',
-            gif: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/200w.gif'
-        }); /* end · sg edit*/
+        // this.defaultGifs.push({
+        //     still: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/giphy-downsized_s.gif',
+        //     gif: 'https://media0.giphy.com/media/I3BLTIP5Gv6h2/200w.gif'
+        // });
+
+        /* end · sg edit*/
 
         this.edit = document.createElement('div');
         this.edit.classList.add('gif__edit');

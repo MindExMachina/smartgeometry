@@ -51,11 +51,11 @@ let GLOBALS = {
         // 'brown': false
     },
     classImages: {
-        'green': 'green.png',
-        'purple': 'purple.png',
-        'orange': 'orange.png',
-        'red': 'red.png',
-        'blue': 'blue.png',
+        'green': 'assets/classImages/green.png',
+        'purple': 'assets/classImages/purple.png',
+        'orange': 'assets/classImages/orange.png',
+        'red': 'assets/classImages/red.png',
+        'blue': 'assets/classImages/blue.png',
         // 'yellow': 'blue.png',
         // 'brown': 'blue.png'
     },
