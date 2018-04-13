@@ -21,6 +21,8 @@ let GLOBALS = {
     wsPort: '6999',
     wsPath: 'Bridge',
     currentId: '',
+    currentIdDuration: 0,
+    currentIdTriggerAt: 2,  // defines how many prediction ticks are needed to trigger a classHandler request
 
     // Robot stuff
     robot: {

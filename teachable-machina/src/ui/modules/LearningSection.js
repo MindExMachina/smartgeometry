@@ -192,7 +192,7 @@ class LearningSection {
                 GLOBALS.currentIdDuration = 0;
             } else {
                 GLOBALS.currentIdDuration++;
-                if (GLOBALS.currentIdDuration == 10) {
+                if (GLOBALS.currentIdDuration >= GLOBALS.currentIdTriggerAt) {
 
                     // Get the the class handler corresponding to the classified class
 
