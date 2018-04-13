@@ -121,7 +121,7 @@ class WsClient {
 
 }
 
-import GLOBALS from './../../config.js';
+import GLOBALS from './../config.js';
 import ReconnectingWebsocket from './lib/ReconnectingWebsocket.js';
 
 export default WsClient;
