@@ -42,6 +42,7 @@ class WiresRight {
 
             bulbElement.classList.add('wires__bulb');
             bulbElement.classList.add('wires__bulb-' + GLOBALS.classNames[index]);
+            console.log(bulbElement.classList);
             this.size();
 
             this.element.appendChild(bulbElement);
@@ -235,7 +236,7 @@ class WiresRight {
         this.startSpace = 130;
         this.endSpace = (this.height + 45) / 5;
         this.canvas.width = 70;
-        this.canvas.height = this.height;
+        this.canvas.height = 770; //this.height;
 
         // this element rotated in css and using height as width
         // if (window.innerWidth >= BREAKPOINT_DESKTOP) {
