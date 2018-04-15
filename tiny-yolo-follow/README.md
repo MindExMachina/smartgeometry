@@ -8,6 +8,6 @@ Track an object and send Machina instructions over WebSockets for a robot to fol
 ## Serve Demo
     yarn serve
     
-## Config
+## Set a `trackingClass`
 
 You need to set the `trackingClass` to the type of object you want to be tracked inside `index.js`. (All other classes are ignored for rendering.)
