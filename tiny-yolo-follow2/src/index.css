@@ -1,0 +1,152 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.c-log {
+    width: 100%;
+    margin: 25px auto;
+    text-align: center;
+    font-size: 120%;
+}
+
+.c-log__coordinates {
+    font-family: 'Cousine', monospace;
+    font-size: 150%;
+    margin-bottom: 50px;
+    font color: rgba(0, 0, 0, 0.80);
+}
+
+.c-log__actions {
+    font-family: 'Cousine', monospace;
+    font-size: 150%;
+}
+
+.c-log__actions code {
+    font-weight: 600;
+    font-size: 150%;
+}
+
+.u-idle {
+    opacity: 0.25;
+}
+
+.wrapper {
+    width: 100%;
+    min-width: 500px;
+}
+
+.logo-wrapper {
+    margin: 0 auto 25px auto;
+    text-align: center;
+}
+
+.logo {
+    max-height: 90px;
+}
+
+#webcam-wrapper video {
+    margin-left: -70px;
+}
+
+#webcam-wrapper {
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    margin: 0 auto;
+    width: 416px;
+    height: 416px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.rect {
+    position: absolute;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    font-size: 24px;
+}
+
+.rect .label {
+    background: white;
+    color: black;
+    display: inline;
+    opacity: 0.8;
+    font-size: 12px;
+    padding: 3px;
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+.intro {
+    max-width: 908px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+.intro h1 {
+    font-weight: 300;
+    font-weight: 2rem;
+}
+
+.intro p {
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+#error-message {
+    text-align: center;
+    margin: 25px 0;
+}
+
+#success-message {
+    font-family: 'Cousine', monospace;
+    font-size: 120%;
+    font-weight: 600;
+    text-align: center;
+    max-width: 450px;
+    margin: 70px auto 30px auto;
+    //color: #00c13f;
+    color: #222;
+    line-height: 1.5;
+}
+
+#loading-message {
+    font-family: 'Cousine', monospace;
+    font-size: 210%;
+    font-weight: 600;
+    margin-top: 150px;
+    color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+.spin {
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    -moz-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}

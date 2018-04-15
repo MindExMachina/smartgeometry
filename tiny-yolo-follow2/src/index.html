@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=600">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.2/gh-fork-ribbon.min.css" />
+    <script async src="https://www.googletagmanager.com/gtag/js"></script>
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <div id="loading-message">
+            Loading Machina TinyYOLO Follow..
+        </div>
+
+        <div id="error-message" style="display:none">
+            Sorry! An error occured while loading the model 😢
+            <br> If you're on an iPhone, please try using Safari.
+        </div>
+
+        <div id="success-message" style="display:none">
+            Machina TinyYOLO Follow
+            <!-- Running tfjs-yolo-tiny -->
+        </div>
+
+        <div class="webcam-ui-container">
+            <div id="webcam-wrapper" style="display: none">
+                <video autoplay playsinline muted id="webcam" width="416" height="416">
+                </video>
+            </div>
+        </div>
+
+        <div class="c-log">
+            <div class="c-log__coordinates"></div>
+            <div class="c-log__actions"></div>
+        </div>
+
+    </div>
+
+    <script src="index.js"></script>
+
+</body>
+
+</html>
