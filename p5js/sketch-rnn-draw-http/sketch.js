@@ -50,6 +50,11 @@
  let strokes = [];
 
  /**
+  * Current model being used by SketchRNN.
+  */
+ let model_name = 'bird';
+
+ /**
   * An stream of incoming strokes to draw, sketched from
   * other clients.
   */
@@ -99,7 +104,7 @@
      frameRate(60);
 
      strokeWeight(3);
-     stroke(255);
+     stroke(0);
      noFill()
  }
 
@@ -110,12 +115,6 @@
  function draw() {
 
      background(255);
-     background(
-         baseR * 200 - 20 * mouseX / 500,
-         50 + 20 * mouseY / 500,
-         baseB * 255,
-         sin(frameCount * 0.01) * 40 + 100);
-     //ellipse(mouseX, mouseY, 10, 10);
 
      var origin_x = 0; //windowWidth * 0.5;
      var origin_y = 0; //windowHeight * 0.5;
@@ -153,6 +152,7 @@
          // }
 
          if (prev_location != undefined && model_prev_pen[0] == 1) {
+             strokeCap(ROUND);
              line(prev_location[0], prev_location[1], x, y);
          }
 
@@ -329,7 +329,7 @@
 
          if (model_pen_up == 1 || i == strokes.length - 1) {
              // TODO: set this globally
-             s += '" style = "fill:none;stroke:black;stroke-width:3"/>';
+             s += '" style="fill:none;stroke:black;stroke-width:3"/>';
          }
 
          model_prev_pen[0] = model_pen_down;
@@ -389,7 +389,7 @@
 
      xhttp.open("POST", url, true);
      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-     xhttp.send("strokes=" + JSON.stringify(strokes));
+     xhttp.send("model=" + model_name + "&strokes=" + JSON.stringify(strokes));
  }
 
  /**
