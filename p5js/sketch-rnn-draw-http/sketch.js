@@ -305,7 +305,7 @@
      for (var i = 0; i < strokes.length; i++) {
 
          if (i == 0 || model_prev_pen[1] == 1) {
-             s += '<polyline class="o-line-0" points = "';
+             s += '<polyline class="o-line-0" points="';
          }
 
          var location = strokes[i];
@@ -327,7 +327,7 @@
          }
          s += x + ',' + y;
 
-         if (model_pen_up == 1) {
+         if (model_pen_up == 1 || i == strokes.length - 1) {
              // TODO: set this globally
              s += '" style = "fill:none;stroke:black;stroke-width:3"/>';
          }
