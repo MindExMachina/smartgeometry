@@ -41,7 +41,7 @@ app.use(function(req, res, next) {
 });
 
 // Load sketch-rnn simple predict module
-var simple_predict = require('./lib/simple_predict');
+var simple_predict = require('../../libs/sketch-rnn/simple_predict');
 
 // ██╗  ██╗████████╗████████╗██████╗ 
 // ██║  ██║╚══██╔══╝╚══██╔══╝██╔══██╗
@@ -99,8 +99,7 @@ app.post('/simple_predict_absolute', function(req, res) {
     if (model) {
         console.log("Requesting model " + model);
         simple_predict.load_model(model);
-    } 
-    else {
+    } else {
         console.log("No model requested");
     }
 

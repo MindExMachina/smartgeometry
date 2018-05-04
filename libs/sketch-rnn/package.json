@@ -1,0 +1,16 @@
+{
+  "name": "sketch-rnn",
+  "version": "1.0.0",
+  "description": "A wrapper to SketchRNN simple predict.",
+  "main": "simple_predict.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nono Martinez Alonso (mail@nono.ma)",
+  "license": "MIT",
+  "dependencies": {
+    "atob": "2.1.1",
+    "btoa": "1.2.1",
+    "numjs": "0.15.1"
+  }
+}
