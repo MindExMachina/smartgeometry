@@ -3,7 +3,7 @@
 Machine intelligence services to design robot-human-ai interactions.
 
 ## Services
-- sketch-rnn [http](services/sketch-rnn/http-server.js) [ws](services/sketch-rnn/websocket-client.js) [js](libs/sketch-rnn/simple_predict.js) [models](http://nono.ma/models/sketchrnn)
+- sketch-rnn [http](services/sketch-rnn/http-server.js) [ws](services/sketch-rnn/websocket-client.js) [js](libraries/sketch-rnn/simple_predict.js) [models](http://nono.ma/models/sketchrnn)
 - pix2pix [http](pix2pix-http) [python](https://github.com/affinelayer/pix2pix-tensorflow) [models](http://nono.ma/models/pix2pix)
 - ibm speech to text [http](samples/ibm-speech-to-text)
 - ibm text to speech [http](samples/ibm-text-to-speech)
