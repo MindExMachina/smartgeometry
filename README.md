@@ -1,4 +1,4 @@
-# Mind Ex Machina · SmartGeometry 2018
+# 🧠x🤖 Mind Ex Machina
 
 Machine intelligence services to design robot-human-ai interactions.
 
@@ -24,3 +24,11 @@ Machine intelligence services to design robot-human-ai interactions.
 ## Resources
 
 - [See Machina Intelligence Resources](https://paper.dropbox.com/doc/Machine-Intelligence-Resources-f2adG8vASJ0uiEZfCBc2i?_tk=share_copylink).
+
+## Share!
+
+We are using the hashtags `#🧠x🤖` and `#MindExMachina` to refer to this project on social media — this way we'll easily find what you share as well.
+
+## About
+
+This project was created and maintained by Nono Martínez Alonso ([@nonoesp](http://twitter.com/nonoesp)) and Jose Luis García del Castillo y López ([@garciadelcast](http://twitter.com/garciadelcast)) as part as SmartGeometry 2018.
