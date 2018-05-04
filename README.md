@@ -45,4 +45,4 @@ We are using the hashtags `#🧠x🤖` and `#MindExMachina` to refer to this pro
 
 ## 👨🏻‍💻👨🏻‍💻🔧
 
-This project was created and maintained by Nono Martínez Alonso ([@nonoesp](http://twitter.com/nonoesp)) and Jose Luis García del Castillo y López ([@garciadelcast](http://twitter.com/garciadelcast)) as part as SmartGeometry 2018.
+This project was created (and is maintained) by Nono Martínez Alonso ([@nonoesp](http://twitter.com/nonoesp)) and Jose Luis García del Castillo y López ([@garciadelcast](http://twitter.com/garciadelcast)) as part as SmartGeometry 2018.
