@@ -21,11 +21,23 @@ Machine intelligence services to design robot-human-ai interactions.
 - [teachable machina](projects/teachable-machina)
 - [tiny yollow follow](projects/tiny-yolo-follow)
 
-## Resources
+## 🧠 Machine Intelligence Resources
 
-- 🧠 [Machine Intelligence Resources](https://paper.dropbox.com/doc/Machine-Intelligence-Resources-f2adG8vASJ0uiEZfCBc2i?_tk=share_copylink) · Here is a collection of links to machine intelligence goodness we have found over the internet while preparing this workshop. The list contains frameworks, projects, services, and other resources that might be useful to use (or spark ideas) for your project. It is an on-going document a we will be adding more content to it as we go. Feel free to browse it to get inspired on what tools to use. And don’t be daunted by this list! Think of these resources as tools for your project — we’ll be happy to help you use them during the workshop.
-- 📹 [Video Tutorials Playlist](https://paper.dropbox.com/doc/Video-Tutorials-Playlist-ays0Gqbgf1Psdiy9aouZZ) · A series of video tutorials we have crafted for you to learn the basics on robotics, coding, and machine learning that you will be using on the cluster for your project. On robotics, you’ll familiarize with general concepts on robot control, with the Machina framework, and RobotStudio. On code, you’ll learn about the HTTP and WebSocket protocols. On machine learning, you’ll see how to use SketchRNN and Watson as services.
-- 👨🏻‍💻 [Video Tutorials Source Code](https://github.com/nonoesp/smartgeometry-tutorials) · Some video tutorials go through building small programs. We have open-sourced all of that code on GitHub so you can browse it, download it, and run in on your machine.
+[Open on Paper](https://paper.dropbox.com/doc/Machine-Intelligence-Resources-f2adG8vASJ0uiEZfCBc2i?_tk=share_copylink)
+
+Here is a collection of links to machine intelligence goodness we have found over the internet while preparing this workshop. The list contains frameworks, projects, services, and other resources that might be useful to use (or spark ideas) for your project. It is an on-going document a we will be adding more content to it as we go. Feel free to browse it to get inspired on what tools to use. And don’t be daunted by this list! Think of these resources as tools for your project — we’ll be happy to help you use them during the workshop.
+
+📹 Video Tutorials Playlist
+
+[Open on Paper](https://paper.dropbox.com/doc/Video-Tutorials-Playlist-ays0Gqbgf1Psdiy9aouZZ
+
+series of video tutorials we have crafted for you to learn the basics on robotics, coding, and machine learning that you will be using on the cluster for your project. On robotics, you’ll familiarize with general concepts on robot control, with the Machina framework, and RobotStudio. On code, you’ll learn about the HTTP and WebSocket protocols. On machine learning, you’ll see how to use SketchRNN and Watson as services.
+
+## 👨🏻‍💻 Video Tutorials Source Code
+
+[Open on GitHub](https://github.com/nonoesp/smartgeometry-tutorials)
+
+Some video tutorials go through building small programs. We have open-sourced all of that code on GitHub so you can browse it, download it, and run in on your machine.
 
 ## Share!
 
