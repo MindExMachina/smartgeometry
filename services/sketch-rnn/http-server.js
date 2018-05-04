@@ -41,7 +41,7 @@ app.use(function(req, res, next) {
 });
 
 // Load sketch-rnn simple predict module
-var simple_predict = require('../../libs/sketch-rnn/simple_predict');
+var simple_predict = require('../../libraries/sketch-rnn/simple_predict');
 
 // ██╗  ██╗████████╗████████╗██████╗ 
 // ██║  ██║╚══██╔══╝╚══██╔══╝██╔══██╗

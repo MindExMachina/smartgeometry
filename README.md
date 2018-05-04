@@ -3,14 +3,24 @@
 Machine intelligence services to design robot-human-ai interactions.
 
 ## Services
+- sketch-rnn [http](services/sketch-rnn/http-server.js) [ws](services/sketch-rnn/websocket-client.js) [js](libs/sketch-rnn/simple_predict.js) [models](http://nono.ma/models/sketchrnn)
+- pix2pix [http](pix2pix-http) [python](https://github.com/affinelayer/pix2pix-tensorflow) [models](http://nono.ma/models/pix2pix)
+- ibm speech to text [http](samples/ibm-speech-to-text)
+- ibm text to speech [http](samples/ibm-text-to-speech)
+- ibm tony analyzer [http](samples/ibm-tone-analyzer)
+- ibm visual recognition [http](samples/ibm-visual-recognition) [coreml](samples/ibm-visual-recognition/CoreMLSwift-CircleOrSquare)
+- coreml [swift](samples/CoreML)
+
+## Libraries
 
 - machina [c#](https://github.com/robotexmachina/machina) [ws](https://github.com/garciadelcastillo/Machina-Tests/tree/master/180402_BridgeApp) [gh](https://github.com/robotexmachina/machina-grasshopper) [dyn](https://github.com/robotexmachina/machina-dynamo)
-- sketch-rnn [http](sketch-rnn/http-server.js) [ws](sketch-rnn/websocket-client.js) [js](sketch-rnn/lib/simple_predict.js) [models](http://nono.ma/models/sketchrnn)
-- pix2pix [http](pix2pix-http) [python](https://github.com/affinelayer/pix2pix-tensorflow) [models](http://nono.ma/models/pix2pix)
-- visual recognition [http](ibm-visual-recognition) [coreml](ibm-visual-recognition/CoreMLSwift-CircleOrSquare)
-- tony analyzer [http](ibm-tone-analyzer)
+- sketch-rnn [js](libs/sketch-rnn/simple_predict.js) [models](http://nono.ma/models/sketchrnn)
 - yolo [c++](https://pjreddie.com/darknet/yolo/)
-- teachable machina [http](teachable-machina)
+
+## Projects
+
+- teachable machina [http](projects/teachable-machina)
+- tiny yollow follow [http](projects/tiny-yolo-follow)
 
 ## Resources
 

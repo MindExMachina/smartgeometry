@@ -30,7 +30,7 @@ const Html5WebSocket = require('html5-websocket');
 const ReconnectingWebSocket = require('reconnecting-websocket');
 
 // Load sketch-rnn simple predict module
-var simple_predict = require('./lib/simple_predict');
+var simple_predict = require('../../libraries/sketch-rnn/simple_predict');
 
 /**
  * Websocket server configuration.
