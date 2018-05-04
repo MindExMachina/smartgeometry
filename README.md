@@ -47,4 +47,4 @@ We are using the hashtags `#🧠x🤖` and `#MindExMachina` to refer to this pro
 
 This project was created (and is maintained) by Nono Martínez Alonso ([@nonoesp](http://twitter.com/nonoesp)) and Jose Luis García del Castillo y López ([@garciadelcast](http://twitter.com/garciadelcast)) as part as SmartGeometry 2018.
 
-Everything is released under the [MIT](https://opensource.org/licenses/MIT) license expect for portions of code which copyright specifies a different license chosen by their authors.
+Everything released under [MIT](https://opensource.org/licenses/MIT) license unless otherwise notes.
