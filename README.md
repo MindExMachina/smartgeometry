@@ -18,8 +18,8 @@ Machine intelligence services to design robot-human-ai interactions.
 
 ## Projects
 
-- teachable machina [http](projects/teachable-machina)
-- tiny yollow follow [http](projects/tiny-yolo-follow)
+- [teachable machina](projects/teachable-machina)
+- [tiny yollow follow](projects/tiny-yolo-follow)
 
 ## Resources
 
