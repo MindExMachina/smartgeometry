@@ -66,21 +66,21 @@ function init() {
 
             "green": function(id) {
                 console.log('This executes when ' + id + ' activates.');
-                console.log('Some phrase green.');
+                console.log('Green.');
             },
 
             // or "purple"
 
             "purple": function(id) {
                 console.log('This executes when ' + id + ' activates.');
-                console.log('Morado.');
+                console.log('Purple.');
             },
 
             // or "orange"
 
             "orange": function(id) {
                 console.log('This executes when ' + id + ' activates.');
-                console.log('Naranja.');
+                console.log('Orange.');
             },
 
             // If no handler is provided for a class id, this gets executed.
