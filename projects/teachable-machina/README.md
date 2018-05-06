@@ -8,9 +8,8 @@ On the browser, this project uses an adapted version of Google's [Teachable Mach
 
 ***
 
-Teachable Machina is based on [Teachable Machine](https://g.co/teachablemachine). You can learn more about the original experiment and try it yourself on [g.co/teachablemachine](https://g.co/teachablemachine). The experiment is built using the [deeplearn.js](https://github.com/PAIR-code/deeplearnjs) library. There is also released a boilerplate version of this project that can be used as a starting point for your own projects: [googlecreativelab/teachable-machine-boilerplate](https://github.com/googlecreativelab/teachable-machine-boilerplate)
-
 ## Development
+
 #### Install dependencies by running (similar to `npm install`)
 ```
 yarn
@@ -43,4 +42,8 @@ openssl req -new -x509 -sha256 -key server.key -out server.cer -days 365 -subj /
 3. Go to `https://YOUR_IP:3000`, then accept the insecure privacy notice, and proceed.
 
 ## Credit
+
+Teachable Machina is based on [Teachable Machine](https://g.co/teachablemachine). You can learn more about the original experiment and try it yourself on [g.co/teachablemachine](https://g.co/teachablemachine). The experiment is built using the [deeplearn.js](https://github.com/PAIR-code/deeplearnjs) library. There is also released a boilerplate version of this project that can be used as a starting point for your own projects: [googlecreativelab/teachable-machine-boilerplate](https://github.com/googlecreativelab/teachable-machine-boilerplate)
+
+
 This is not an official Google product, but an experiment that was a collaborative effort by friends from [Støj](http://stoj.io/), [Use All Five](https://useallfive.com/) and Creative Lab and [PAIR](https://ai.google/pair/) teams at Google.
