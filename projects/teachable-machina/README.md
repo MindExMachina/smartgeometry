@@ -2,11 +2,13 @@
 
 ![Teachable Machina](assets/static/cover.jpg)
 
-Teachable Machina is an experiment that makes it easier for anyone to explore machine learning, live in the browser – no coding required — and send instructions to Machina bridge to be executed by a robot.
+Train a neural network with your webcam and control a robot.
 
-Learn more about the original experiment and try it yourself on [g.co/teachablemachine](https://g.co/teachablemachine). The experiment is built using the [deeplearn.js](https://github.com/PAIR-code/deeplearnjs) library.
+On the browser, this project uses an adapted version of Google's [Teachable Machine](https://g.co/teachablemachine) experiment. To control the robot, it uses [Machina Bridge](https://github.com/RobotExMachina/Machina-Bridge), a WebSocket server that receives Machina instructions and sends them to a robot.
 
-There is also released a boilerplate version of this project that can be used as a starting point for your own projects: [googlecreativelab/teachable-machine-boilerplate](https://github.com/googlecreativelab/teachable-machine-boilerplate)
+***
+
+Teachable Machina is based on [Teachable Machine](https://g.co/teachablemachine). You can learn more about the original experiment and try it yourself on [g.co/teachablemachine](https://g.co/teachablemachine). The experiment is built using the [deeplearn.js](https://github.com/PAIR-code/deeplearnjs) library. There is also released a boilerplate version of this project that can be used as a starting point for your own projects: [googlecreativelab/teachable-machine-boilerplate](https://github.com/googlecreativelab/teachable-machine-boilerplate)
 
 ## Development
 #### Install dependencies by running (similar to `npm install`)
