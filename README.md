@@ -23,7 +23,7 @@ Machine intelligence services to design robot-human-ai interactions.
 
 ## Projects
 
-- [robosketch-rnn](https://github.com/MindExMachina/robotsketch-rnn)
+- [robosketch-rnn](https://github.com/MindExMachina/robosketch-rnn)
 - [teachable machina](https://github.com/MindExMachina/teachable-machina)
 - [tiny yollow follow](projects/tiny-yolo-follow)
 
