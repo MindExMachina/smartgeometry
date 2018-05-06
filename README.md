@@ -23,7 +23,8 @@ Machine intelligence services to design robot-human-ai interactions.
 
 ## Projects
 
-- [teachable machina](projects/teachable-machina)
+- [robosketch-rnn](https://github.com/MindExMachina/robotsketch-rnn)
+- [teachable machina](https://github.com/MindExMachina/teachable-machina)
 - [tiny yollow follow](projects/tiny-yolo-follow)
 
 ## 🧠 Machine Intelligence Resources
