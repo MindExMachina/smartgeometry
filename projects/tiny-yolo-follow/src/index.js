@@ -11,6 +11,7 @@ const webcam = new Webcam(document.getElementById('webcam'));
 
 // sg
 let trackingClass = 'apple';
+let drawAllClasses = false; // wether to draw all other classes that are not 'trackingClass'
 let threshold = 35;
 let verbose = true;
 const ws = new WsClient('smartgeometry.herokuapp.com:80');
@@ -71,14 +72,16 @@ async function run() {
             //drawRect(x - 5, y - 5, 10, 10, '', 'blue');
 
             // draw bounding box
-            // let bx = left;
-            // let by = top;
-            // let bw = right - left;
-            // let bh = bottom - top;
+            if (drawAllClasses) {
+                let bx = left;
+                let by = top;
+                let bw = right - left;
+                let bh = bottom - top;
 
-            // drawRect(bx, by, bw, bh,
-            //     `${className} Confidence: ${Math.round(classProb * 100)}%`,
-            //     'white')
+                drawRect(bx, by, bw, bh,
+                    `${className} Confidence: ${Math.round(classProb * 100)}%`,
+                    'white')
+            }
 
             // is this the object type we are tracking? (say, an orange)
             if (className == trackingClass) {
