@@ -6,6 +6,10 @@ Train a neural network with your webcam and control a robot.
 
 On the browser, this project uses an adapted version of Google's [Teachable Machine](https://g.co/teachablemachine) experiment. To control the robot, it uses [Machina Bridge](https://github.com/RobotExMachina/Machina-Bridge), a WebSocket server that receives Machina instructions and sends them to a robot.
 
+## Settings
+
+You can configure Teachable Machina using [config.js](src/config.js).
+
 ## Development
 
 #### Install dependencies by running (similar to `npm install`)
