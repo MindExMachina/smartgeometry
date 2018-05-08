@@ -23,7 +23,7 @@ func main() {
 	//fmt.Println("Your network ip is: " + Get() + "")
 
 	// Start server at the host specified in the environment file
-	fmt.Println(fmt.Sprintf("Starting server at %s...", Env("HOST")))
+	fmt.Println(fmt.Sprintf("Starting server at %s...", Env("HOST")+":"+Env("PORT")))
 
 	MakeRoutes()
 
