@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "license": "MIT",
   "dependencies": {
-    "@tensorflow/tfjs": "0.x",
+    "@tensorflow/tfjs": "0.9.1",
     "reconnecting-websocket": "3.2.2",
     "tfjs-yolo-tiny": "^0.0.4"
   },

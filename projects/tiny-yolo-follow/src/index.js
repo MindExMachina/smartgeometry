@@ -3,17 +3,20 @@ import yolo, { downloadModel } from 'tfjs-yolo-tiny';
 
 import { Webcam } from './webcam';
 
-import WsClient from './ws-client';
+// import WsClient from './ws-client';
 import { SSL_OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG } from 'constants';
+// import Robot from './machina.js';
 
 let model;
 const webcam = new Webcam(document.getElementById('webcam'));
+
+
 
 // sg
 let trackingClass = 'orange';
 let threshold = 35;
 let verbose = true;
-const ws = new WsClient('smartgeometry.herokuapp.com:80');
+// const ws = new WsClient('smartgeometry.herokuapp.com:80');
 const log__coordinates = document.querySelector('.c-log__coordinates');
 const log__actions = document.querySelector('.c-log__actions');
 
@@ -70,6 +73,15 @@ async function run() {
             // draw center point
             //drawRect(x - 5, y - 5, 10, 10, '', 'blue');
             // draw bounding box
+
+            let bx = left;
+            let by = top;
+            let bw = right - left;
+            let bh = bottom - top;
+
+            drawRect(bx, by, bw, bh,
+                `${className} Confidence: ${Math.round(classProb * 100)}%`,
+                'white')
 
             // is this the object type we are tracking? (say, an orange)
             if (className == trackingClass) {
