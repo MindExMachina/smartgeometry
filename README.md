@@ -8,8 +8,8 @@ Machine intelligence services to design robot-human-ai interactions.
 
 ## Libraries
 
-- machina [c#](https://github.com/robotexmachina/machina) [ws](https://github.com/garciadelcastillo/Machina-Tests/tree/master/180402_BridgeApp) [gh](https://github.com/robotexmachina/machina-grasshopper) [dyn](https://github.com/robotexmachina/machina-dynamo)
-- sketch-rnn [js](libraries/sketch-rnn/simple_predict.js) [models](http://nono.ma/models/sketchrnn)
+- machina [c#](https://github.com/robotexmachina/machina) [bridge-ws](https://github.com/RobotExMachina/Machina-Bridge) [gh](https://github.com/robotexmachina/machina-grasshopper) [dyn](https://github.com/robotexmachina/machina-dynamo)
+- sketch-rnn [js](https://github.com/MindExMachina/sketch-rnn) [models](http://nono.ma/models/sketchrnn)
 - yolo [c++](https://pjreddie.com/darknet/yolo/)
 
 ## Samples
@@ -23,7 +23,8 @@ Machine intelligence services to design robot-human-ai interactions.
 
 ## Projects
 
-- [teachable machina](projects/teachable-machina)
+- [robosketch-rnn](https://github.com/MindExMachina/robosketch-rnn)
+- [teachable machina](https://github.com/MindExMachina/teachable-machina)
 - [tiny yollow follow](projects/tiny-yolo-follow)
 
 ## 🧠 Machine Intelligence Resources

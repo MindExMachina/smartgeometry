@@ -13,7 +13,8 @@ const webcam = new Webcam(document.getElementById('webcam'));
 
 
 // sg
-let trackingClass = 'orange';
+let trackingClass = 'apple';
+let drawAllClasses = false; // wether to draw all other classes that are not 'trackingClass'
 let threshold = 35;
 let verbose = true;
 // const ws = new WsClient('smartgeometry.herokuapp.com:80');
@@ -72,7 +73,18 @@ async function run() {
 
             // draw center point
             //drawRect(x - 5, y - 5, 10, 10, '', 'blue');
+
             // draw bounding box
+            if (drawAllClasses) {
+                let bx = left;
+                let by = top;
+                let bw = right - left;
+                let bh = bottom - top;
+
+                drawRect(bx, by, bw, bh,
+                    `${className} Confidence: ${Math.round(classProb * 100)}%`,
+                    'white')
+            }
 
             let bx = left;
             let by = top;
@@ -132,6 +144,32 @@ async function run() {
                         actionsText += ' and ';
                     }
                     actionsText += actions[i];
+                }
+
+                let isLeft = actions.indexOf('left') > -1 ? true : false;
+                let isRight = actions.indexOf('right') > -1 ? true : false;
+                let isDown = actions.indexOf('down') > -1 ? true : false;
+                let isUp = actions.indexOf('up') > -1 ? true : false;
+                let isStop = actions.indexOf('stop') > -1 ? true : false;
+
+                if (isLeft && isUp) {
+
+                } else if (isLeft && isDown) {
+
+                } else if (isRight && isUp) {
+
+                } else if (isRight && isDown) {
+
+                } else if (isRight) {
+
+                } else if (isLeft) {
+
+                } else if (isDown) {
+
+                } else if (isUp) {
+
+                } else if (isStop) {
+
                 }
 
                 log__coordinates.innerHTML = '[' + Math.round(relativeX) + ', ' + Math.round(relativeY) + ']';

@@ -41,7 +41,7 @@ app.use(function(req, res, next) {
 });
 
 // Load sketch-rnn simple predict module
-var simple_predict = require('../../libraries/sketch-rnn/simple_predict');
+var simple_predict = require('./lib/simple_predict');
 
 // ██╗  ██╗████████╗████████╗██████╗ 
 // ██║  ██║╚══██╔══╝╚══██╔══╝██╔══██╗
@@ -96,6 +96,45 @@ app.post('/simple_predict_absolute', function(req, res) {
     // Get strokes from the POST request's parameters
     var strokes = req.body.strokes;
     var model = req.body.model;
+    if (model) {
+        console.log("Requesting model " + model);
+        simple_predict.load_model(model);
+    } else {
+        console.log("No model requested");
+    }
+
+    // If strokes are provided on the request,
+    // set them as input strokes for simple_predict
+    if (strokes) {
+        var strokes = JSON.parse(strokes);
+        simple_predict.set_absolute_strokes(strokes)
+    }
+
+    // Request a sketch prediction
+    simple_predict.predict();
+
+    // Get the predicted strokes
+    var predicted_strokes = simple_predict.output_strokes_absolute();
+
+    // Return the predicted strokes in the response
+    res.json(predicted_strokes);
+
+});
+
+
+
+/**
+ * A GET route to request a prediction from SketchRNN
+ * (from an absolute set of strokes).
+ */
+app.get('/simple_predict_absolute', function(req, res) {
+
+    // Load simple_predict.js module
+    //var simple_predict = require('./lib/simple_predict');
+
+    // Get strokes from the POST request's parameters
+    var strokes = req.param('strokes');
+    var model = req.param('model');
     if (model) {
         console.log("Requesting model " + model);
         simple_predict.load_model(model);

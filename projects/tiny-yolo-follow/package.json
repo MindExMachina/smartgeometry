@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "tfjs-yolo-tiny-demo",
   "version": "1.0.0",
   "main": "src/index.js",
@@ -20,3 +21,26 @@
     "serve": "parcel src/index.html"
   }
 }
+=======
+    "name": "tfjs-yolo-tiny-demo",
+    "version": "1.0.0",
+    "main": "src/index.js",
+    "license": "MIT",
+    "dependencies": {
+        "@tensorflow/tfjs": "0.9.1",
+        "reconnecting-websocket": "3.2.2",
+        "tfjs-yolo-tiny": "^0.0.4"
+    },
+    "devDependencies": {
+        "babel-core": "^6.26.0",
+        "babel-plugin-transform-runtime": "^6.23.0",
+        "babel-polyfill": "^6.5.0",
+        "babel-preset-env": "^1.6.1",
+        "parcel-bundler": "^1.7.0"
+    },
+    "scripts": {
+        "build": "rm -rf ./dist && parcel build src/index.html --public-url='/tfjs-yolo-tiny-demo/'",
+        "serve": "parcel src/index.html"
+    }
+}
+>>>>>>> 5fb55ea319aeba87f6b545a0632c1aa84d48caa1
