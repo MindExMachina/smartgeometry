@@ -7,7 +7,7 @@
     "atob": "2.0.3",
     "body-parser": "1.18.2",
     "btoa": "1.1.2",
-    "express": "4.16.2",
+    "express": "4.17.3",
     "html5-websocket": "2.0.2",
     "numjs": "0.15.1",
     "reconnecting-websocket": "3.2.2",
